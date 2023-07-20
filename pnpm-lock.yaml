@@ -22,11 +22,9 @@ importers:
 
   packages/pkg1: {}
 
-  packages/pkg2:
-    dependencies:
-      '@power/pkg1':
-        specifier: workspace:^
-        version: link:../pkg1
+  packages/pkg2: {}
+
+  packages/utils: {}
 
 packages:
 

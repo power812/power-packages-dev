@@ -11,7 +11,13 @@ function output(path) {
         {
           file: `./packages/${path}/dist/index.js`,
           format: 'umd',
-          name: 'web-see',
+          name: 'power',
+          sourcemap: true
+        },
+        {
+          file: `./packages/${path}/dist/index.esm.js`,
+          format: 'esm',
+          name: 'power',
           sourcemap: true
         }
       ],

@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "publish": "changeset publish --registry=https://registry.npmjs.com/"
+    "changeset": "changeset",
+    "publish": "changeset publish --registry=https://registry.npmjs.com/ --tag"
   },
   "keywords": [],
   "author": "",
