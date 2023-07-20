@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "changeset": "changeset",
+    "changeset": "changeset && changeset version",
     "publish": "changeset publish --registry=https://registry.npmjs.com/ --tag"
   },
   "keywords": [],
