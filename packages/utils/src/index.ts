@@ -1,6 +1,7 @@
 import {isObject, cloneDeep} from './cloneDeep'
+import {request}  from './request'
 export {
   isObject,
-  cloneDeep
+  cloneDeep,
+  request
 }
-console.log(111)
