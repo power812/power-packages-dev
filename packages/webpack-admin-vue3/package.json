@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --progress --config ./webpack.config.js",
-    "build": "webpack"
+    "dev": "webpack serve --progress --config ./webpack.dev.config.js",
+    "dev:server": "node ./server/index.js",
+    "build:report": "webpack-bundle-analyzer ./stats.json",
+    "build:measure": "webpack --config ./speedmeasure.js",
+    "build": "webpack  --config ./webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",
