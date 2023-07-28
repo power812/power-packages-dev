@@ -1,1 +1,4 @@
-export declare function pk1(): any;
+import { isObject, cloneDeep } from './cloneDeep';
+import { request } from './request';
+import { copy } from './copy';
+export { isObject, cloneDeep, request, copy };

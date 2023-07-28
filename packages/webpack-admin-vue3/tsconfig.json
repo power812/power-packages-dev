@@ -19,6 +19,6 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"] // lib用于指定要包含在编译中的库文件 },
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", "types/**/*.d.ts", "types/*.d.ts", "src/main.ts"], // 指定要编译的路径列表，但是和files的区别在于，这里的路径可以是文件夹，也可以是
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", "types/**/*.d.ts", "types/*.d.ts", "src/index.ts"], // 指定要编译的路径列表，但是和files的区别在于，这里的路径可以是文件夹，也可以是
   "exclude": ["node_modules", "**/*.spec.ts"] // exclude表示要排除的、不编译的文件，它也可以指定一个列表，规则和include一样，
 }

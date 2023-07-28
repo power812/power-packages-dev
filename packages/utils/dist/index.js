@@ -1,14 +1,63 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.power = {}));
-})(this, (function (exports) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'axios'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.power = {}, global.axios));
+})(this, (function (exports, axios) { 'use strict';
 
-    function pk1() {
-        console.log('I am pk1');
+    function isObject(obj) {
+        return Object.prototype.toString.call(obj) === '[object Object]';
+    }
+    function cloneDeep(val) {
+        if (isObject(val)) {
+            const res = {};
+            for (const key in val) {
+                res[key] = cloneDeep(val[key]);
+            }
+            return res;
+        }
+        else if (Array.isArray(val)) {
+            return val.slice();
+        }
+        else {
+            return val;
+        }
     }
 
-    exports.pk1 = pk1;
+    const BASE_URL = 'http://localhost:7001';
+    const request = axios.create({
+        baseURL: BASE_URL,
+        timeout: 5000,
+    });
+    request.interceptors.request.use((config) => {
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+    request.interceptors.response.use((response) => {
+        return response.data;
+    }, (err) => {
+        return Promise.reject(err);
+    });
+
+    async function copy(command) {
+        if (navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(command);
+        }
+        else {
+            const input = document.createElement('input');
+            input.value = command;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('Copy');
+            input.className = 'input';
+            input.style.display = 'none';
+        }
+    }
+
+    exports.cloneDeep = cloneDeep;
+    exports.copy = copy;
+    exports.isObject = isObject;
+    exports.request = request;
 
 }));
 //# sourceMappingURL=index.js.map

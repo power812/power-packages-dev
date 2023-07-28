@@ -23,7 +23,8 @@ function output(path) {
       ],
       plugins: [
         typescript()
-      ]
+      ],
+      external: ['axios'] 
     }
   ];
 }
