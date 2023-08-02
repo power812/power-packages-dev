@@ -1,6 +1,6 @@
 {
-  "name": "vite-react18-kanban",
-  "version": "1.0.0",
+  "name": "@power88/vite-react18-kanban",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
