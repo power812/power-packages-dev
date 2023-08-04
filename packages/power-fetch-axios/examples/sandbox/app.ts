@@ -75,7 +75,8 @@ import axios from '../../index';
 
     request.innerHTML = JSON.stringify(options, null, 2);
     axios(options)
-      .then(function (res) {
+      .then(function (res: any) {
+        console.log(res);
         response.innerHTML = JSON.stringify(res, null, 2);
         error.innerHTML = 'None';
       })
@@ -111,9 +112,9 @@ import axios from '../../index';
   syncWithLocalStorage();
   syncParamsAndData();
 })();
-
-import requestParams from './requestParams';
-console.log(requestParams);
+// 请求参数
+// import requestParams from './requestParams';
+// console.log(requestParams);
 // GET
 // axios.get(URL, { params: BODY }).then(handleSuccess).catch(handleFailure);
 

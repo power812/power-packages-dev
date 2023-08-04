@@ -13,6 +13,12 @@ router.get('/api', function (req, res) {
     msg: '请求成功',
   });
 });
+router.post('/api', function (req, res) {
+  res.json({
+    data: req.body,
+    msg: '请求成功',
+  });
+});
 
 app.use(router);
 
