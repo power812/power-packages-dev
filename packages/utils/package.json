@@ -1,11 +1,15 @@
 {
   "name": "@power88/utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "src/index.ts",
   "module": "./dist/index.esm.js",
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/power812/power-packages-dev/tree/master/packages/utils"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

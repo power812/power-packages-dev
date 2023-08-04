@@ -11,4 +11,4 @@ console.log(getQueryStringArgs('a'))
 //   platfrom: 'MacIntel';
 //   version: '114.0.0.0';
 // }
-console.log(browser);
+

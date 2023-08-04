@@ -1,5 +1,11 @@
 # @power88/utils
 
+## 2.0.1
+
+### Patch Changes
+
+- 添加浏览器能力检测
+
 ## 2.0.0
 
 ### Major Changes
