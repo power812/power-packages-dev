@@ -1,4 +1,5 @@
 import axios from '../../index';
+import { AxiosRequestConfig } from '../../lib/types';
 (function () {
   // Just for you IE8
   if (typeof Array.prototype.indexOf === 'undefined') {
@@ -65,26 +66,29 @@ import axios from '../../index';
   }
 
   submit.onclick = function () {
-    var options = {
+    var options: AxiosRequestConfig = {
       url: getUrl(),
       params: !acceptsData(method.value) ? getParams() : undefined,
       data: acceptsData(method.value) ? getData() : undefined,
       method: method.value,
       headers: getHeaders(),
+      // responseType: 'json',
     };
 
     request.innerHTML = JSON.stringify(options, null, 2);
     axios(options)
       .then(function (res: any) {
-        console.log(res);
-        response.innerHTML = JSON.stringify(res, null, 2);
+        console.log('响应:', res);
+        response.innerHTML = JSON.stringify(res.data, null, 2);
         error.innerHTML = 'None';
       })
-      .catch(function (res) {
-        console.log(res);
-        // error.innerHTML = JSON.stringify(res.toJSON(), null, 2)
-        // console.error('Axios caught an error from request', res.toJSON());
-        // response.innerHTML = JSON.stringify(res.data, null, 2);
+      .catch(function (e) {
+        console.log(e.message);
+        console.log(e.config);
+        console.log(e.request);
+        console.log(e.code);
+        error.innerHTML = JSON.stringify(e, null, 2);
+        response.innerHTML = JSON.stringify(e.data, null, 2);
       });
   };
 
@@ -115,8 +119,35 @@ import axios from '../../index';
 // 请求参数
 // import requestParams from './requestParams';
 // console.log(requestParams);
+const handleSuccess = () => {};
+const handleFailure = () => {};
 // GET
-// axios.get(URL, { params: BODY }).then(handleSuccess).catch(handleFailure);
+// axios('/api', {
+//   method: 'post',
+//   data: {
+//     msg: 'hello2434',
+//   },
+// });
 
 // POST
-// axios.post(URL, BODY).then(handleSuccess).catch(handleFailure);
+// axios.post('/api', { msg: 'post' }).then(handleSuccess).catch(handleFailure);
+
+// 范型
+// interface User {
+//   name: string;
+//   age: number;
+// }
+
+// function getUser<T>() {
+//   return axios<T>('/api')
+//     .then((res) => res)
+//     .catch((err) => console.error(err));
+// }
+
+// async function userList() {
+//   const user = await getUser<User>();
+//   if (user) {
+//     user.data.name
+//   }
+// }
+// userList();

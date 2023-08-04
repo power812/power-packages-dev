@@ -25,3 +25,35 @@ export function processHeaders(data: any, headers?: headersType): any {
   }
   return headers;
 }
+/**
+ * 解析响应头
+ * headers: "date: Mon, 29 Jul 2019 07:47:16 GMT ↵etag: W/"d-Ssxx4FRxEutDLwo2+xkkxKc4y0k" ↵connection: close ↵x-powered-by: Express ↵content-length: 13 ↵content-type: application/json; charset=utf-8
+ * 
+ * ｛
+    headers: "date: Mon, 29 Jul 2019 07:47:16 GMT
+    etag: 'W/"d-Ssxx4FRxEutDLwo2+xkkxKc4y0k"'
+    connection: 'close'
+    x-powered-by: 'Express'
+    content-length: '13'
+    content-type: 'application/json; charset=utf-8'
+｝
+ * */
+export function parseHeaders(headers: string): any {
+  let res = Object.create(null);
+  if (!headers) {
+    return res;
+  }
+  headers.split('\r\n').forEach((line) => {
+    let [key, val] = line.split(':');
+    key = key.trim().toLowerCase();
+    if (!key) {
+      return;
+    }
+    if (val) {
+      val = val.trim();
+    }
+
+    res[key] = val;
+  });
+  return res;
+}
