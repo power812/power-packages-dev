@@ -2,20 +2,25 @@ import { AxiosRequestConfig, AxiosPromise, AxiosResponse, Method, PromiseArr } f
 import dispatchRequest from '../request/xhr';
 import { bulidURL } from '../helpers/url';
 import { transformRequest } from '../helpers/data';
-import { processHeaders } from '../helpers/headers';
+import { processHeaders, flattenHeaders } from '../helpers/headers';
 import { InterceptorManager } from './InterceptorManager';
+import mergeConfig from '../helpers/mergeConfig';
 
 class Axios {
   private interceptors: {
     request: InterceptorManager<AxiosRequestConfig>;
     response: InterceptorManager<AxiosResponse<any>>;
   };
-  constructor() {
+  defaults: AxiosRequestConfig;
+  constructor(defaultConfig: AxiosRequestConfig) {
+    // 默认配置
+    this.defaults = defaultConfig;
     this.interceptors = {
       request: new InterceptorManager<AxiosRequestConfig>(),
       response: new InterceptorManager<AxiosResponse>(),
     };
   }
+
   // 处理参数
   processConfig(config: AxiosRequestConfig): void {
     // 处理get请求params参数
@@ -25,7 +30,8 @@ class Axios {
     config.data = transformRequest(data);
     // 处理请求头content-type
     config.headers = processHeaders(data, headers);
-    console.log(config.headers, 'headers');
+    // 扁平化headers
+    config.headers = flattenHeaders(config.headers, config.method!);
   }
   request(configOrUrl: string, config?: AxiosRequestConfig): AxiosPromise {
     /**
@@ -39,6 +45,10 @@ class Axios {
     } else {
       config = configOrUrl;
     }
+    // 合并参数
+
+    config = mergeConfig(this.defaults, config);
+    console.log('config', config);
     // 处理请求参数
     this.processConfig(config);
 

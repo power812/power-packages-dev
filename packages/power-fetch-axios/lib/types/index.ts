@@ -2,12 +2,24 @@ export type headersType = { [key: string]: string };
 export type XMLHttpRequestResponseType = '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
 export interface AxiosRequestConfig {
   url?: string;
-  method?: string;
+  method?: Method;
+  headers?: any;
   data?: any;
   params?: any;
-  headers?: headersType;
   responseType?: XMLHttpRequestResponseType;
   timeout?: number;
+  // transformRequest?: AxiosTransformer | AxiosTransformer[];
+  // transformResponse?: AxiosTransformer | AxiosTransformer[];
+  // cancelToken?: CancelToken;
+  withCredentials?: boolean;
+  xsrfCookieName?: string;
+  xsrfHeaderName?: string;
+  onDownloadProgress?: (e: ProgressEvent) => void;
+  onUploadProgress?: (e: ProgressEvent) => void;
+  // auth?: AxiosBasicCredentials;
+  paramsSerializer?: (params: any) => string;
+  baseURL?: string;
+  [propName: string]: any;
 }
 export type Method =
   | 'get'
@@ -44,6 +56,7 @@ export interface AxiosError<T = any> extends Error {
 
 // Axios类
 export interface Axios {
+  defaults: AxiosRequestConfig;
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>;
     response: AxiosInterceptorManager<AxiosResponse>;

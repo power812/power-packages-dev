@@ -1,5 +1,5 @@
-import { isObject } from './utils';
-import { headersType } from './../types';
+import { isObject, deepMerge } from './utils';
+import { headersType, Method } from './../types';
 
 function normalizeHeaderName(headers: any, normalizedName: string): void {
   if (!headers) {
@@ -56,4 +56,19 @@ export function parseHeaders(headers: string): any {
     res[key] = val;
   });
   return res;
+}
+// headers扁平化
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) {
+    return headers;
+  }
+  headers = deepMerge(headers.common || {}, headers[method] || {}, headers);
+
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common'];
+
+  methodsToDelete.forEach((method) => {
+    delete headers[method];
+  });
+
+  return headers;
 }

@@ -14,3 +14,27 @@ export function extend<T, U>(to: T, from: U): T & U {
   }
   return to as T & U;
 }
+export function deepMerge(...objs: any[]): any {
+  const result = Object.create(null);
+  function assignValue(val: any, key: string) {
+    if (isObject(result[key]) && isObject(val)) {
+      result[key] = deepMerge(result[key], val);
+    } else if (isObject(val)) {
+      result[key] = deepMerge({}, val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (let i = 0; i < objs.length; i++) {
+    const obj = objs[i];
+    if (!isObject(obj)) {
+      console.error('参数不是对象，合并错误');
+    }
+    for (let key in obj) {
+      assignValue(obj[key], key);
+    }
+  }
+
+  return result;
+}

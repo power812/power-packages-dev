@@ -1,5 +1,5 @@
 import axios from '../../index';
-import { AxiosRequestConfig } from '../../lib/types';
+import { AxiosRequestConfig, Method } from '../../lib/types';
 (function () {
   // Just for you IE8
   if (typeof Array.prototype.indexOf === 'undefined') {
@@ -70,7 +70,7 @@ import { AxiosRequestConfig } from '../../lib/types';
       url: getUrl(),
       params: !acceptsData(method.value) ? getParams() : undefined,
       data: acceptsData(method.value) ? getData() : undefined,
-      method: method.value,
+      method: method.value as Method,
       headers: getHeaders(),
       // responseType: 'json',
     };
@@ -182,45 +182,63 @@ const handleFailure = () => {};
 // });
 // axios.interceptors.request.eject(myInterceptor);
 
-// 请求拦截器1
-let requestInterceptor1 = axios.interceptors.request.use((config) => {
-  config.headers && (config.headers.test += 'requestInterceptors1---');
-  return config;
-});
+// // 请求拦截器1
+// let requestInterceptor1 = axios.interceptors.request.use((config) => {
+//   config.headers && (config.headers.test += 'requestInterceptors1---');
+//   return config;
+// });
 
-// 请求拦截器2
-axios.interceptors.request.use((config) => {
-  config.headers && (config.headers.test += 'requestInterceptors2---');
-  return config;
-});
+// // 请求拦截器2
+// axios.interceptors.request.use((config) => {
+//   config.headers && (config.headers.test += 'requestInterceptors2---');
+//   return config;
+// });
 
-// 请求拦截器3
-axios.interceptors.request.use((config) => {
-  config.headers && (config.headers.test += 'requestInterceptors3---');
-  return config;
-});
+// // 请求拦截器3
+// axios.interceptors.request.use((config) => {
+//   config.headers && (config.headers.test += 'requestInterceptors3---');
+//   return config;
+// });
 
-// 响应拦截器1
-axios.interceptors.response.use((response) => {
-  response.data.test += '响应拦截器1';
-  return response;
-});
+// // 响应拦截器1
+// axios.interceptors.response.use((response) => {
+//   response.data.test += '响应拦截器1';
+//   return response;
+// });
 
-// 响应拦截器2
-let responseInterceptor2 = axios.interceptors.response.use((response) => {
-  response.data.test += '响应拦截器2';
-  return response;
-});
+// // 响应拦截器2
+// let responseInterceptor2 = axios.interceptors.response.use((response) => {
+//   response.data.test += '响应拦截器2';
+//   return response;
+// });
 
-// 响应拦截器3
-axios.interceptors.response.use((response) => {
-  response.data.test += '响应拦截器3';
-  return response;
-});
+// // 响应拦截器3
+// axios.interceptors.response.use((response) => {
+//   response.data.test += '响应拦截器3';
+//   return response;
+// });
 
-axios.interceptors.request.eject(requestInterceptor1);
-axios.interceptors.response.eject(responseInterceptor2);
+// axios.interceptors.request.eject(requestInterceptor1);
+// axios.interceptors.response.eject(responseInterceptor2);
 
-axios.get('/api', { headers: { test: 'NLRX---' } }).then((res) => {
-  console.log(res);
+// axios.get('/api', { headers: { test: 'NLRX---' } }).then((res) => {
+//   console.log(res);
+// });
+
+// 默认配置
+axios.defaults.headers.common['NLRX'] = 'Hello NLRX';
+axios.defaults.headers.post['NLRX1'] = 'post NLRX';
+axios.defaults.headers.get['NLRX2'] = 'get NLRX';
+
+axios({
+  url: '/api',
+  method: 'post',
+  data: JSON.stringify({
+    a: 1,
+  }),
+  headers: {
+    test: '321',
+  },
+}).then((res) => {
+  console.log(res.data);
 });

@@ -1,8 +1,9 @@
 import { AxiosInstance, AxiosRequestConfig } from './types';
 import Axios from './core/Axios';
 import { extend } from './helpers/utils';
+import defaults from './defaultes';
 function createInstance() {
-  const context = new Axios();
+  const context = new Axios(defaults);
   const axios = async function (url: string, config?: AxiosRequestConfig) {
     return await context.request(url, config);
   };
