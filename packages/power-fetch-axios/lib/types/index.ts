@@ -1,5 +1,8 @@
 export type headersType = { [key: string]: string };
 export type XMLHttpRequestResponseType = '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
+export interface AxiosTransformer {
+  (data: any, headers?: any): any;
+}
 export interface AxiosRequestConfig {
   url?: string;
   method?: Method;
@@ -8,8 +11,8 @@ export interface AxiosRequestConfig {
   params?: any;
   responseType?: XMLHttpRequestResponseType;
   timeout?: number;
-  // transformRequest?: AxiosTransformer | AxiosTransformer[];
-  // transformResponse?: AxiosTransformer | AxiosTransformer[];
+  transformRequest?: AxiosTransformer | AxiosTransformer[];
+  transformResponse?: AxiosTransformer | AxiosTransformer[];
   // cancelToken?: CancelToken;
   withCredentials?: boolean;
   xsrfCookieName?: string;
@@ -61,7 +64,6 @@ export interface Axios {
     request: AxiosInterceptorManager<AxiosRequestConfig>;
     response: AxiosInterceptorManager<AxiosResponse>;
   };
-  processConfig(config: AxiosRequestConfig): void;
   request<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>;
 
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>;
@@ -84,6 +86,9 @@ export interface Axios {
 export interface AxiosInstance extends Axios {
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
   <T = any>(urlOrCofig: string, config?: AxiosRequestConfig): AxiosPromise<T>;
+}
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance;
 }
 
 // 拦截器

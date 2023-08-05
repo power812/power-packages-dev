@@ -1,5 +1,5 @@
 import axios from '../../index';
-import { AxiosRequestConfig, Method } from '../../lib/types';
+import { AxiosRequestConfig, Method, AxiosTransformer } from '../../lib/types';
 (function () {
   // Just for you IE8
   if (typeof Array.prototype.indexOf === 'undefined') {
@@ -226,19 +226,78 @@ const handleFailure = () => {};
 // });
 
 // 默认配置
-axios.defaults.headers.common['NLRX'] = 'Hello NLRX';
-axios.defaults.headers.post['NLRX1'] = 'post NLRX';
-axios.defaults.headers.get['NLRX2'] = 'get NLRX';
+// axios.defaults.headers.common['NLRX'] = 'Hello NLRX';
+// axios.defaults.headers.post['NLRX1'] = 'post NLRX';
+// axios.defaults.headers.get['NLRX2'] = 'get NLRX';
 
-axios({
+// axios({
+//   url: '/api',
+//   method: 'post',
+//   data: JSON.stringify({
+//     a: 1,
+//   }),
+//   headers: {
+//     test: '321',
+//   },
+// }).then((res) => {
+//   console.log(res.data);
+// });
+
+// 转换函数
+
+// axios({
+//   url: '/api',
+//   method: 'post',
+//   data: {
+//     a: 1,
+//   },
+//   transformRequest: [
+//     function (data) {
+//       data.a = data.a + 1;
+//       return data;
+//     },
+//     ...(axios.defaults.transformRequest as AxiosTransformer[]),
+//   ],
+//   transformResponse: [
+//     ...(axios.defaults.transformResponse as AxiosTransformer[]),
+//     function (data) {
+//       data.b = '对响应进行了转换';
+//       return data;
+//     },
+//   ],
+// }).then((res) => {
+//   console.log(res.data);
+// });
+
+// 多实例
+const instance1 = axios.create({
+  headers: {
+    NLRX: 'Hello NLRX',
+  },
+});
+
+instance1({
   url: '/api',
   method: 'post',
   data: JSON.stringify({
     a: 1,
   }),
+}).then((res) => {
+  console.log(res.data);
+});
+
+const instance2 = axios.create({
   headers: {
-    test: '321',
+    test: '123',
   },
+});
+
+instance2({
+  url: '/api',
+  method: 'post',
+  data: JSON.stringify({
+    a: 1,
+  }),
 }).then((res) => {
   console.log(res.data);
 });

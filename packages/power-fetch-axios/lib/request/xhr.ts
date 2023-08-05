@@ -1,9 +1,27 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types';
 import { parseHeaders } from '../helpers/headers';
-import { transformResponse } from '../helpers/data';
-import { AxiosError, createError } from '../helpers/error';
+import transform from '../helpers/transform';
+import { createError } from '../helpers/error';
+import { bulidURL } from '../helpers/url';
+
+import { processHeaders, flattenHeaders } from '../helpers/headers';
+export function processConfig(config: AxiosRequestConfig): void {
+  // 处理get请求params参数
+  const { url = '', params, data, headers } = config;
+  config.url = bulidURL(url, params);
+  // 处理post的data参数
+  config.data = transform(data, headers, config.transformRequest);
+  // 处理请求头content-type
+  config.headers = processHeaders(data, headers);
+  // 扁平化headers
+  config.headers = flattenHeaders(config.headers, config.method!);
+}
+
 export default function dispatchRequest(config: AxiosRequestConfig) {
   return new Promise((resolve: (res: AxiosResponse) => void, reject) => {
+    // 处理参数
+    processConfig(config);
+    // XMLHttp实例化
     let request = new XMLHttpRequest();
     /**************** 参数处理 ************************/
     const { data = null, url = '', method = 'get', headers, responseType, timeout } = config;
@@ -21,7 +39,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
         request.setRequestHeader(name, headers[name]);
       });
     }
-    // 定义响应类型(responseType属性，它默认为text，打印出来的data数据就是字符串类型，而第二条请求我们指定了responseType: "json")
+    // 定义响应类型(responseType属性，它默认为text，可以指定了responseType: "json")
     if (responseType) {
       request.responseType = responseType;
     }
@@ -53,7 +71,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
       // 状态码是否在 200-300 之间，来决定是否抛出异常
       if (request.status >= 200 && request.status < 300) {
         // 转化成json
-        response.data = transformResponse(response.data);
+        response.data = transform(response.data, response.headers, response.config.transformResponse);
         resolve(response);
       } else {
         reject(createError(`响应失败,响应状态码: ${response.status}`, config, request.status, request, response));

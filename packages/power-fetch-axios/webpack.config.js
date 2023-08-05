@@ -1,9 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 import exp from 'constants';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,8 +17,7 @@ const entry = fs.readdirSync(examplesPath).reduce((entries, dir) => {
 
   return entries;
 }, {});
-console.log(entry);
-console.log(path.resolve(__dirname, './__build__'));
+
 const config = {
   mode: 'development',
   /**
@@ -45,7 +43,7 @@ const config = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
-  devtool: 'eval-cheap-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       // {

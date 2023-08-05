@@ -1,8 +1,6 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse, Method, PromiseArr } from '../types';
 import dispatchRequest from '../request/xhr';
-import { bulidURL } from '../helpers/url';
-import { transformRequest } from '../helpers/data';
-import { processHeaders, flattenHeaders } from '../helpers/headers';
+
 import { InterceptorManager } from './InterceptorManager';
 import mergeConfig from '../helpers/mergeConfig';
 
@@ -22,17 +20,17 @@ class Axios {
   }
 
   // 处理参数
-  processConfig(config: AxiosRequestConfig): void {
-    // 处理get请求params参数
-    const { url = '', params, data, headers } = config;
-    config.url = bulidURL(url, params);
-    // 处理post的data参数
-    config.data = transformRequest(data);
-    // 处理请求头content-type
-    config.headers = processHeaders(data, headers);
-    // 扁平化headers
-    config.headers = flattenHeaders(config.headers, config.method!);
-  }
+  // processConfig(config: AxiosRequestConfig): void {
+  //   // 处理get请求params参数
+  //   const { url = '', params, data, headers } = config;
+  //   config.url = bulidURL(url, params);
+  //   // 处理post的data参数
+  //   config.data = transform(data, headers, config.transformRequest);
+  //   // 处理请求头content-type
+  //   config.headers = processHeaders(data, headers);
+  //   // 扁平化headers
+  //   config.headers = flattenHeaders(config.headers, config.method!);
+  // }
   request(configOrUrl: string, config?: AxiosRequestConfig): AxiosPromise {
     /**
      * 支持二种写法
@@ -46,11 +44,10 @@ class Axios {
       config = configOrUrl;
     }
     // 合并参数
-
     config = mergeConfig(this.defaults, config);
     console.log('config', config);
     // 处理请求参数
-    this.processConfig(config);
+    // this.processConfig(config);
 
     // 构建 arr = ['请求拦截器2','请求拦截器1',...,'真实请求','响应拦截器1','响应拦截器2',...]
     let arr: PromiseArr<any>[] = [
