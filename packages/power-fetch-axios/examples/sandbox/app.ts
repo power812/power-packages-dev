@@ -151,3 +151,76 @@ const handleFailure = () => {};
 //   }
 // }
 // userList();
+
+// 拦截器
+// 添加一个请求拦截器
+// axios.interceptors.request.use(
+//   function(config) {
+//     // 在发送请求之前可以做一些事情
+//     return config;
+//   },
+//   function(error) {
+//     // 处理请求错误
+//     return Promise.reject(error);
+//   }
+// );
+// // 添加一个响应拦截器
+// axios.interceptors.response.use(
+//   function(response) {
+//     // 处理响应数据
+//     return response;
+//   },
+//   function(error) {
+//     // 处理响应错误
+//     return Promise.reject(error);
+//   }
+// );
+
+// // 删除一个请求拦截器
+// const myInterceptor = axios.interceptors.request.use(function() {
+//   /*...*/
+// });
+// axios.interceptors.request.eject(myInterceptor);
+
+// 请求拦截器1
+let requestInterceptor1 = axios.interceptors.request.use((config) => {
+  config.headers && (config.headers.test += 'requestInterceptors1---');
+  return config;
+});
+
+// 请求拦截器2
+axios.interceptors.request.use((config) => {
+  config.headers && (config.headers.test += 'requestInterceptors2---');
+  return config;
+});
+
+// 请求拦截器3
+axios.interceptors.request.use((config) => {
+  config.headers && (config.headers.test += 'requestInterceptors3---');
+  return config;
+});
+
+// 响应拦截器1
+axios.interceptors.response.use((response) => {
+  response.data.test += '响应拦截器1';
+  return response;
+});
+
+// 响应拦截器2
+let responseInterceptor2 = axios.interceptors.response.use((response) => {
+  response.data.test += '响应拦截器2';
+  return response;
+});
+
+// 响应拦截器3
+axios.interceptors.response.use((response) => {
+  response.data.test += '响应拦截器3';
+  return response;
+});
+
+axios.interceptors.request.eject(requestInterceptor1);
+axios.interceptors.response.eject(responseInterceptor2);
+
+axios.get('/api', { headers: { test: 'NLRX---' } }).then((res) => {
+  console.log(res);
+});

@@ -1,4 +1,3 @@
-export interface Axios {}
 export type headersType = { [key: string]: string };
 export type XMLHttpRequestResponseType = '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
 export interface AxiosRequestConfig {
@@ -34,7 +33,7 @@ export interface AxiosResponse<T = any> {
   request: any; // 请求的 XMLHttpRequest 对象实例
 }
 
-export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
+export interface AxiosPromise<T = any> extends Promise<T> {}
 
 export interface AxiosError<T = any> extends Error {
   config: AxiosRequestConfig;
@@ -45,6 +44,10 @@ export interface AxiosError<T = any> extends Error {
 
 // Axios类
 export interface Axios {
+  interceptors: {
+    request: AxiosInterceptorManager<AxiosRequestConfig>;
+    response: AxiosInterceptorManager<AxiosResponse>;
+  };
   processConfig(config: AxiosRequestConfig): void;
   request<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>;
 
@@ -68,4 +71,21 @@ export interface Axios {
 export interface AxiosInstance extends Axios {
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>;
   <T = any>(urlOrCofig: string, config?: AxiosRequestConfig): AxiosPromise<T>;
+}
+
+// 拦截器
+export interface ResolvedFn<T = any> {
+  (val: T): T | Promise<T>;
+}
+export interface RejectedFn {
+  (err: any): any;
+}
+export interface AxiosInterceptorManager<T> {
+  use(resolve: ResolvedFn<T>, reject?: RejectedFn): number;
+  eject(id: number): void;
+}
+
+export interface PromiseArr<T> {
+  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise);
+  rejected?: RejectedFn;
 }
