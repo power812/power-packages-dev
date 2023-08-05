@@ -1,5 +1,5 @@
 import axios from '../../index';
-import { AxiosRequestConfig, Method, AxiosTransformer } from '../../lib/types';
+import { AxiosRequestConfig, Method, AxiosTransformer, Canceler } from '../../lib/types';
 (function () {
   // Just for you IE8
   if (typeof Array.prototype.indexOf === 'undefined') {
@@ -269,35 +269,113 @@ const handleFailure = () => {};
 //   console.log(res.data);
 // });
 
-// 多实例
-const instance1 = axios.create({
-  headers: {
-    NLRX: 'Hello NLRX',
-  },
-});
+// // 多实例
+// const instance1 = axios.create({
+//   headers: {
+//     NLRX: 'Hello NLRX',
+//   },
+// });
 
-instance1({
-  url: '/api',
-  method: 'post',
-  data: JSON.stringify({
-    a: 1,
-  }),
-}).then((res) => {
-  console.log(res.data);
-});
+// instance1({
+//   url: '/api',
+//   method: 'post',
+//   data: JSON.stringify({
+//     a: 1,
+//   }),
+// }).then((res) => {
+//   console.log(res.data);
+// });
 
-const instance2 = axios.create({
-  headers: {
-    test: '123',
-  },
-});
+// const instance2 = axios.create({
+//   headers: {
+//     test: '123',
+//   },
+// });
 
-instance2({
-  url: '/api',
-  method: 'post',
-  data: JSON.stringify({
-    a: 1,
-  }),
-}).then((res) => {
-  console.log(res.data);
-});
+// instance2({
+//   url: '/api',
+//   method: 'post',
+//   data: JSON.stringify({
+//     a: 1,
+//   }),
+// }).then((res) => {
+//   console.log(res.data);
+// });
+// // 取消
+
+// const CancelToken = axios.CancelToken;
+// let cancel: Canceler;
+
+// axios
+//   .get('/api/cancel', {
+//     cancelToken: new CancelToken((c) => {
+//       cancel = c;
+//     }),
+//   })
+//   .catch(function (e) {
+//     console.log(e);
+//   });
+
+// setTimeout(() => {
+//   cancel('Operation canceled by the user');
+// }, 1000);
+// const CancelToken = axios.CancelToken;
+// const source = CancelToken.source();
+
+// axios
+//   .get('/api/cancel', {
+//     cancelToken: source.token,
+//   })
+//   .catch(function (e) {
+//     // 新增
+//     if (axios.isCancel(e)) {
+//       console.log(`请求取消原因：${e.message}`);
+//     }
+//   });
+
+// setTimeout(() => {
+//   source.cancel('Operation canceled by the user');
+// }, 1000);
+
+// setTimeout(() => {
+//   axios
+//     .get('/api/cancel', {
+//       cancelToken: source.token,
+//     })
+//     .catch(function (e) {
+//       if (axios.isCancel(e)) {
+//         console.log(`请求取消原因：${e.message}`);
+//       }
+//     });
+// }, 1500);
+
+// axios.post('http://localhost:3000/api/addWithCredentials', {}).then((res) => {
+//   console.log(res);
+// });
+
+// axios
+//   .post(
+//     'http://localhost:3000/api/addWithCredentials',
+//     {},
+//     {
+//       withCredentials: true,
+//     }
+//   )
+//   .then((res) => {
+//     console.log(res);
+//   });
+
+// xsrf
+axios
+  .get(
+    'http://localhost:3000/api/defendXSRF',
+
+    {
+      xsrfCookieName: 'hello',
+      xsrfHeaderName: 'gekkiNLRX',
+      withCredentials: true,
+    }
+  )
+  .then((res) => {
+    console.log(res);
+  });

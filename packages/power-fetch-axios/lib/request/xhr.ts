@@ -1,10 +1,18 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types';
 import { parseHeaders } from '../helpers/headers';
+import isURLSameOrigin from '../helpers/isURLSameOrigin';
+import cookies from '../helpers/cookies';
 import transform from '../helpers/transform';
 import { createError } from '../helpers/error';
 import { bulidURL } from '../helpers/url';
-
 import { processHeaders, flattenHeaders } from '../helpers/headers';
+
+// 如果已经请求取消，则抛出异常。
+function throwIfCancellationRequested(config: AxiosRequestConfig) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
 export function processConfig(config: AxiosRequestConfig): void {
   // 处理get请求params参数
   const { url = '', params, data, headers } = config;
@@ -19,17 +27,40 @@ export function processConfig(config: AxiosRequestConfig): void {
 
 export default function dispatchRequest(config: AxiosRequestConfig) {
   return new Promise((resolve: (res: AxiosResponse) => void, reject) => {
+    // 减少二次请求浪费
+    throwIfCancellationRequested(config);
     // 处理参数
     processConfig(config);
     // XMLHttp实例化
     let request = new XMLHttpRequest();
     /**************** 参数处理 ************************/
-    const { data = null, url = '', method = 'get', headers, responseType, timeout } = config;
+    const {
+      data = null,
+      url = '',
+      method = 'get',
+      headers,
+      responseType,
+      xsrfCookieName,
+      xsrfHeaderName,
+      timeout,
+      cancelToken,
+      withCredentials,
+    } = config;
     request.open(method.toUpperCase(), url, true);
     // 请求超时时间
     if (timeout) {
       request.timeout = timeout;
     }
+    // 请求中是需要携带cookie的
+    if (withCredentials) {
+      request.withCredentials = true;
+    }
+    // xsrf防御(xsrfCookieName 表示存储 token 的 cookie 名称，xsrfHeaderName 表示请求 headers 中 token 对应的 header 名称)
+    let xsrfValue = (withCredentials || isURLSameOrigin(url)) && xsrfCookieName ? cookies.read(xsrfCookieName) : undefined;
+    if (xsrfValue) {
+      headers[xsrfHeaderName!] = xsrfValue;
+    }
+
     // 添加请求头
     if (headers) {
       Object.keys(headers).forEach((name) => {
@@ -45,6 +76,13 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     }
     // Send the request
     request.send(data || null);
+    // 取消请求
+    if (cancelToken) {
+      cancelToken.promise.then((reason) => {
+        request.abort();
+        reject(reason);
+      });
+    }
     /**************** xhr实例事件监听 ************************/
 
     //监听请求变化,拿到响应数据
@@ -54,7 +92,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
         return;
       }
       if (request.status === 0) {
-        console.error('网络错误或跨域数据请求');
+        console.info('网络错误或跨域数据请求或主动取消请求');
         return;
       }
       const responseHeaders = parseHeaders(request.getAllResponseHeaders());

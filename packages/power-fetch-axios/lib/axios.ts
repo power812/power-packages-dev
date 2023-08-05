@@ -3,6 +3,9 @@ import Axios from './core/Axios';
 import { extend } from './helpers/utils';
 import defaults from './defaultes';
 import mergeConfig from './helpers/mergeConfig';
+import CancelToken from './cancel/CancelToken';
+import Cancel from './cancel/Cancel';
+import isCancel from './cancel/isCancel';
 function createInstance(defaultConfig: AxiosRequestConfig) {
   const context = new Axios(defaultConfig);
   const axios = async function (url: string, userConfig?: AxiosRequestConfig) {
@@ -19,5 +22,9 @@ const axios = createInstance(defaults);
 axios.create = function (userConfig: AxiosRequestConfig) {
   return createInstance(mergeConfig(defaults, userConfig));
 };
+// 取消请求
+axios.CancelToken = CancelToken; // 取消类
+axios.Cancel = Cancel;
+axios.isCancel = isCancel;
 
 export default axios;

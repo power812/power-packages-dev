@@ -183,4 +183,53 @@ instance2({
 }).then((res) => {
   console.log(res.data);
 });
+
+// 取消请求
+import { Canceler } from '../../lib/types';
+
+const CancelToken = axios.CancelToken;
+let cancel: Canceler;
+
+axios
+  .get('/api/cancel', {
+    cancelToken: new CancelToken((c) => {
+      cancel = c;
+    }),
+  })
+  .catch(function (e) {
+    console.log(e);
+  });
+
+setTimeout(() => {
+  cancel('Operation canceled by the user');
+}, 1000);
+
+
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
+axios
+  .get('/api/cancel', {
+    cancelToken: source.token,
+  })
+  .catch(function (e) {
+    console.log(e);
+  });
+
+setTimeout(() => {
+  source.cancel('Operation canceled by the user');
+}, 1000);
+
+
+
+// csrf
+axios
+  .get("/api/defendXSRF", {
+    xsrfCookieName: "XSRF-NLRX",
+    xsrfHeaderName: "X-XSRF-NLRX",
+    withCredentials: true,
+  })
+  .then((res) => {
+    console.log(res);
+  });
 ```

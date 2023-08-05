@@ -3,7 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-import exp from 'constants';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const examplesPath = path.resolve(__dirname, './examples');
@@ -78,14 +77,14 @@ const config = {
     port: 8000,
     hot: true,
     // publicPath: '.',
-    proxy: {
-      // 配置跨域
-      '/api': {
-        target: 'http://localhost:3000',
-        ws: true,
-        changOrigin: true,
-      },
-    },
+    // proxy: {
+    //   // 配置跨域
+    //   '/api': {
+    //     target: 'http://localhost:3000',
+    //     ws: true,
+    //     changOrigin: true,
+    //   },
+    // },
   },
   plugins: [
     new CleanWebpackPlugin(),

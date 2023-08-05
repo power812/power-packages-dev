@@ -1,5 +1,6 @@
 export type headersType = { [key: string]: string };
 export type XMLHttpRequestResponseType = '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
+import CancelToken from '../cancel/CancelToken';
 export interface AxiosTransformer {
   (data: any, headers?: any): any;
 }
@@ -13,10 +14,10 @@ export interface AxiosRequestConfig {
   timeout?: number;
   transformRequest?: AxiosTransformer | AxiosTransformer[];
   transformResponse?: AxiosTransformer | AxiosTransformer[];
-  // cancelToken?: CancelToken;
+  cancelToken?: CancelToken;
   withCredentials?: boolean;
-  xsrfCookieName?: string;
-  xsrfHeaderName?: string;
+  xsrfCookieName?: string; //表示存储 token 的 cookie 名称
+  xsrfHeaderName?: string; //请求 headers 中 token 对应的 header 名称
   onDownloadProgress?: (e: ProgressEvent) => void;
   onUploadProgress?: (e: ProgressEvent) => void;
   // auth?: AxiosBasicCredentials;
@@ -89,6 +90,9 @@ export interface AxiosInstance extends Axios {
 }
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance;
+  CancelToken: CancelTokenStatic;
+  Cancel: CancelStatic;
+  isCancel: (value: any) => boolean;
 }
 
 // 拦截器
@@ -106,4 +110,34 @@ export interface AxiosInterceptorManager<T> {
 export interface PromiseArr<T> {
   resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise);
   rejected?: RejectedFn;
+}
+// 取消功能
+
+// export interface CancelToken{
+//   promise: Promise<Cancel | undefined>;
+//   reason?: string;
+// }
+export interface CancelExecutor {
+  (cancel: Canceler): void;
+}
+export interface Canceler {
+  (message?: string): void;
+}
+
+export interface CancelTokenStatic {
+  new (executor: CancelExecutor): CancelToken;
+  source(): CancelTokenSource;
+}
+export interface CancelTokenSource {
+  token: CancelToken;
+  cancel: Canceler;
+}
+
+export interface Cancel {
+  message?: string;
+}
+
+export interface CancelStatic {
+  new (message?: string): Cancel;
+  // message: string;
 }
