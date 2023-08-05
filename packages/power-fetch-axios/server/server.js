@@ -1,8 +1,13 @@
 import express from 'express';
-const app = express();
+
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-// import csrf from 'csurf';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import path from 'path';
+const app = express();
+const filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(filename);
 
 // var csrfProtection = csrf({ cookie: true });
 const router = express.Router();
@@ -68,6 +73,10 @@ router.get('/api/defendXSRF', function (req, res) {
   res.json(req.headers);
 });
 
+// 文件下载
+const __filename = router.get('/api/downloadFile', function (req, res) {
+  res.sendFile(path.resolve(__dirname, '../a.png'));
+});
 app.use(router);
 
 const port = process.env.PORT || 3000;

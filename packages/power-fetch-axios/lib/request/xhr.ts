@@ -1,5 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types';
 import { parseHeaders } from '../helpers/headers';
+import { isFormData } from '../helpers/utils';
 import isURLSameOrigin from '../helpers/isURLSameOrigin';
 import cookies from '../helpers/cookies';
 import transform from '../helpers/transform';
@@ -19,6 +20,7 @@ export function processConfig(config: AxiosRequestConfig): void {
   config.url = bulidURL(url, params);
   // 处理post的data参数
   config.data = transform(data, headers, config.transformRequest);
+
   // 处理请求头content-type
   config.headers = processHeaders(data, headers);
   // 扁平化headers
@@ -45,6 +47,8 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
       timeout,
       cancelToken,
       withCredentials,
+      onDownloadProgress,
+      onUploadProgress,
     } = config;
     request.open(method.toUpperCase(), url, true);
     // 请求超时时间
@@ -54,6 +58,18 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     // 请求中是需要携带cookie的
     if (withCredentials) {
       request.withCredentials = true;
+    }
+    // 下载上传进度
+    // 我们通过 FormData 上传文件的时候，这个Content-Type 字段就不能用了
+    if (isFormData(data)) {
+      delete headers['Content-Type'];
+    }
+    if (onDownloadProgress) {
+      request.onprogress = onDownloadProgress;
+    }
+
+    if (onUploadProgress) {
+      request.upload.onprogress = onUploadProgress;
     }
     // xsrf防御(xsrfCookieName 表示存储 token 的 cookie 名称，xsrfHeaderName 表示请求 headers 中 token 对应的 header 名称)
     let xsrfValue = (withCredentials || isURLSameOrigin(url)) && xsrfCookieName ? cookies.read(xsrfCookieName) : undefined;

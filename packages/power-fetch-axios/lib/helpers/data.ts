@@ -12,7 +12,7 @@ export function transformResponse(data: any): any {
     try {
       data = JSON.parse(data);
     } catch (e) {
-      console.error('响应数据解析失败');
+      // console.info(e);
     }
   }
   return data;

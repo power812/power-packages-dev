@@ -366,16 +366,16 @@ const handleFailure = () => {};
 //   });
 
 // xsrf
-axios
-  .get(
-    'http://localhost:3000/api/defendXSRF',
+// axios
+//   .get(
+//     'http://localhost:3000/api/defendXSRF',
 
-    {
-      xsrfCookieName: 'hello',
-      xsrfHeaderName: 'gekkiNLRX',
-      withCredentials: true,
-    }
-  )
-  .then((res) => {
-    console.log(res);
-  });
+//     {
+//       xsrfCookieName: 'hello',
+//       xsrfHeaderName: 'gekkiNLRX',
+//       withCredentials: true,
+//     }
+//   )
+//   .then((res) => {
+//     console.log(res);
+//   });
