@@ -7,3 +7,6 @@ export function isDate(val: any): val is Date {
 export function isObject(val: any): val is Object {
   return toString.call(val) === '[object Object]';
 }
+export function isFormData(val: any): boolean {
+  return val && val instanceof FormData;
+}
