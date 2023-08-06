@@ -13,5 +13,5 @@ export interface powerUtils {
   isObject: (val: any) => boolean;
   isDate: (val: any) => boolean;
   isFormData: (val: any) => boolean;
-  browser: 
+  browser: browserType;
 }

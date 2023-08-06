@@ -4,6 +4,7 @@ declare class Axios {
     defaults: AxiosRequestConfig;
     constructor(defaultConfig: AxiosRequestConfig);
     request(configOrUrl: string, config?: AxiosRequestConfig): AxiosPromise;
+    getUri(config?: AxiosRequestConfig): string;
     get(url: string, config?: AxiosRequestConfig): AxiosPromise;
     delete(url: string, config?: AxiosRequestConfig): AxiosPromise;
     head(url: string, config?: AxiosRequestConfig): AxiosPromise;

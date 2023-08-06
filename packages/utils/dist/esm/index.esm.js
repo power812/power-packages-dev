@@ -5,6 +5,16 @@ function isDate$1(val) {
 function isObject$1(val) {
     return toString$1.call(val) === '[object Object]';
 }
+function isFormData$1(val) {
+    return val && val instanceof FormData;
+}
+
+var is = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    isDate: isDate$1,
+    isFormData: isFormData$1,
+    isObject: isObject$1
+});
 
 function cloneDeep(val) {
     if (isObject$1(val)) {
@@ -3690,15 +3700,11 @@ class UaBrowser {
 }
 var browser = new UaBrowser().getEnv();
 
-const powerUtils = {
-    isObject: isObject$1,
-    cloneDeep,
+const powerUtils = Object.assign({ cloneDeep,
     request,
     copy,
     getQueryStringArgs,
-    browser,
-    isDate: isDate$1,
-};
+    browser }, is);
 
 export { powerUtils as default };
 //# sourceMappingURL=index.esm.js.map
