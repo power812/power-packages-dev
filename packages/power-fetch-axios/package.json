@@ -5,6 +5,9 @@
   "main": "./lib/index.js",
   "module": "./dist/esm/index.min.js",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -cw",
     "examples": "node ./examples/server.js",
@@ -56,5 +59,6 @@
     "types",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "gitHead": "9625276451bc8a3758f16596f07951f11a2be22d"
 }
