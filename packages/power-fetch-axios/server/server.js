@@ -96,6 +96,28 @@ router.get('/api/checkStatus', function (req, res) {
   res.end();
 });
 
+// 添加paramsSerializer属性
+router.get('/api/addParamsSerializer', function (req, res) {
+  res.end();
+});
+
+// 添加baseURL属性
+router.get('/api/baseURL', function (req, res) {
+  res.end();
+});
+
+// 添加axios.all和axios.spread方法
+router.get('/api/allAndSpreadA', function (req, res) {
+  res.json({
+    data: 'allAndSpreadA',
+  });
+});
+router.get('/api/allAndSpreadB', function (req, res) {
+  res.json({
+    data: 'allAndSpreadB',
+  });
+});
+
 app.use(router);
 const port = process.env.PORT || 3000;
 const lister = app.listen(port, () => {

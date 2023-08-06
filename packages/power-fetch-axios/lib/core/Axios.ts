@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse, Method, PromiseArr } from '../types';
-import dispatchRequest from '../request/xhr';
+import dispatchRequest, { transformUrl } from './xhr';
 
 import { InterceptorManager } from './InterceptorManager';
 import mergeConfig from '../helpers/mergeConfig';
@@ -82,6 +82,11 @@ class Axios {
 
     // const res = await dispatchRequest.call(this, config);
     // return res;
+  }
+
+  getUri(config?: AxiosRequestConfig): string {
+    config = mergeConfig(this.defaults, config);
+    return transformUrl(config);
   }
   get(url: string, config?: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithoutData('get', url, config);

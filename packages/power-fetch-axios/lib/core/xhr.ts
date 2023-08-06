@@ -7,6 +7,16 @@ import transform from '../helpers/transform';
 import { createError } from '../helpers/error';
 import { bulidURL } from '../helpers/url';
 import { processHeaders, flattenHeaders } from '../helpers/headers';
+import { isAbsoluteURL } from '../helpers/isAbsoluteURL';
+import { combineURLs } from '../helpers/combineURLs';
+
+export function transformUrl(config: AxiosRequestConfig): string {
+  let { url, params, paramsSerializer, baseURL } = config;
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURLs(baseURL, url);
+  }
+  return bulidURL(url!, params, paramsSerializer);
+}
 
 // 如果已经请求取消，则抛出异常。
 function throwIfCancellationRequested(config: AxiosRequestConfig) {
@@ -16,8 +26,8 @@ function throwIfCancellationRequested(config: AxiosRequestConfig) {
 }
 export function processConfig(config: AxiosRequestConfig): void {
   // 处理get请求params参数
-  const { url = '', params, data, headers } = config;
-  config.url = bulidURL(url, params);
+  let { url = '', params, data, headers, paramsSerializer, baseURL } = config;
+  config.url = transformUrl(config);
   // 处理post的data参数
   config.data = transform(data, headers, config.transformRequest);
 

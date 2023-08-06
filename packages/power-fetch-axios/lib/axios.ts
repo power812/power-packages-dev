@@ -27,4 +27,13 @@ axios.CancelToken = CancelToken; // 取消类
 axios.Cancel = Cancel;
 axios.isCancel = isCancel;
 
+axios.all = function (promises) {
+  return Promise.all(promises);
+};
+axios.spread = function (callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
 export default axios;

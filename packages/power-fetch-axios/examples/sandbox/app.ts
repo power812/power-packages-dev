@@ -395,10 +395,83 @@ const handleFailure = () => {};
 //   console.log(res);
 // });
 
-axios
-  .get('/api/checkStatus', {
-    validateStatus: (status) => status >= 200 && status < 400,
+// axios
+//   .get('/api/checkStatus', {
+//     validateStatus: (status) => status >= 200 && status < 400,
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+// axios
+//   .get('/api/addParamsSerializer', {
+//     params: new URLSearchParams('a=b&c=d'),
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+
+// axios
+//   .get('/api/addParamsSerializer', {
+//     params: {
+//       a: 1,
+//       b: 2,
+//       c: ['a', 'b', 'c'],
+//     },
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+
+// axios
+//   .get('/api/addParamsSerializer', {
+//     params: {
+//       a: 1,
+//       b: 2,
+//       c: ['a', 'b', 'c'],
+//     },
+//     paramsSerializer: function (params) {
+//       return JSON.stringify(params);
+//     },
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+// baseURL
+// const instance = axios.create({
+//   baseURL: 'http://localhost:8000/',
+// });
+
+// instance.get('/api/baseURL');
+
+// instance.get('http://localhost:3000/api/baseURL');
+
+// const config = {
+//   baseURL: 'https://www.baidu.com/',
+//   url: '/user/NLRX',
+//   params: {
+//     idClient: 1,
+//     idTest: 2,
+//     testString: 'thisIsATest',
+//   },
+// };
+// console.log(axios.getUri(config));
+
+function getA() {
+  return axios.get('/api/allAndSpreadA');
+}
+
+function getB() {
+  return axios.get('/api/allAndSpreadB');
+}
+
+axios.all([getA(), getB()]).then(
+  axios.spread(function (resA, resB) {
+    console.log(resA.data);
+    console.log(resB.data);
   })
-  .then((res) => {
-    console.log(res);
-  });
+);
+
+axios.all([getA(), getB()]).then(([resA, resB]) => {
+  console.log(resA.data);
+  console.log(resB.data);
+});
