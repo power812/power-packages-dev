@@ -6,7 +6,6 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const examplesPath = path.resolve(__dirname, './examples');
-console.log(path.resolve(examplesPath, '../public'));
 const entry = fs.readdirSync(examplesPath).reduce((entries, dir) => {
   const fullDir = path.join(examplesPath, dir);
   const entry = path.join(fullDir, 'app.ts');
@@ -63,14 +62,6 @@ const config = {
       {
         directory: __dirname,
       },
-      // {
-      //   directory: path.join(__dirname, './examples'),
-      //   publicPath: '/examples',
-      // },
-      // {
-      //   directory: path.join(__dirname, './__build__'),
-      //   publicPath: '/__build__',
-      // },
     ],
     compress: true,
     open: false,
@@ -86,17 +77,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    // new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NoEmitOnErrorsPlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: path.resolve(path.dirname('./'), './examples/sandbox/client.html'),
-    //   Chunk: ['sandbox'],
-    //   inject: 'body', // 性能监控需要在头部
-    // }),
-  ],
+  plugins: [new CleanWebpackPlugin()],
 };
 
 export default config;

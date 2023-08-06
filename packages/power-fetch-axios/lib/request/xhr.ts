@@ -37,6 +37,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     let request = new XMLHttpRequest();
     /**************** 参数处理 ************************/
     const {
+      auth,
       data = null,
       url = '',
       method = 'get',
@@ -46,6 +47,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
       xsrfHeaderName,
       timeout,
       cancelToken,
+      validateStatus,
       withCredentials,
       onDownloadProgress,
       onUploadProgress,
@@ -54,6 +56,13 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     // 请求超时时间
     if (timeout) {
       request.timeout = timeout;
+    }
+
+    // Authorization 属性，它的值为 username:password 经过base64加密
+    if (auth) {
+      const username = auth.username || '';
+      const password = auth.password || '';
+      headers['Authorization'] = 'Basic ' + btoa(username + ':' + password);
     }
     // 请求中是需要携带cookie的
     if (withCredentials) {
@@ -123,7 +132,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
         request, // xhr实例
       };
       // 状态码是否在 200-300 之间，来决定是否抛出异常
-      if (request.status >= 200 && request.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         // 转化成json
         response.data = transform(response.data, response.headers, response.config.transformResponse);
         resolve(response);

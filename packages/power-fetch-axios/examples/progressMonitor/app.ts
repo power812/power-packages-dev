@@ -1,4 +1,4 @@
-import axios from '../../index';
+import axios from '../../lib/index';
 
 const instance = axios.create({
   onDownloadProgress: function (ProgressEvent) {

@@ -17,7 +17,7 @@ const lib = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
 const outputFileName = 'axios';
 const name = 'axios';
-const namedInput = './index.ts'; //入口路径
+const namedInput = './lib/index.ts'; //入口路径
 const defaultInput = './lib/axios.ts';
 
 const buildConfig = ({ es5, browser = true, minifiedVersion = true, ...config }) => {

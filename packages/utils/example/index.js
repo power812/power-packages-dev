@@ -1,5 +1,6 @@
-import { browser,getQueryStringArgs } from '../dist/index.esm.js';
-console.log(getQueryStringArgs('a'))
+import powerUtils from '../dist/index.esm.js';
+
+console.log(powerUtils.getQueryStringArgs('a'));
 // {
 //   browser: 'Chrome';
 //   device: 'PC';
@@ -11,4 +12,3 @@ console.log(getQueryStringArgs('a'))
 //   platfrom: 'MacIntel';
 //   version: '114.0.0.0';
 // }
-

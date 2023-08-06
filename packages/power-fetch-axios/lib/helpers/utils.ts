@@ -28,9 +28,9 @@ export function deepMerge(...objs: any[]): any {
 
   for (let i = 0; i < objs.length; i++) {
     const obj = objs[i];
-    if (!isObject(obj)) {
-      console.error('参数不是对象，合并错误');
-    }
+    // if (!isObject(obj)) {
+    //   break;
+    // }
     for (let key in obj) {
       assignValue(obj[key], key);
     }

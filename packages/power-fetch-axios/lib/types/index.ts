@@ -4,6 +4,10 @@ import CancelToken from '../cancel/CancelToken';
 export interface AxiosTransformer {
   (data: any, headers?: any): any;
 }
+export interface AxiosBasicCredentials {
+  username: string;
+  password: string;
+}
 export interface AxiosRequestConfig {
   url?: string;
   method?: Method;
@@ -20,9 +24,10 @@ export interface AxiosRequestConfig {
   xsrfHeaderName?: string; //请求 headers 中 token 对应的 header 名称
   onDownloadProgress?: (e: ProgressEvent) => void;
   onUploadProgress?: (e: ProgressEvent) => void;
-  // auth?: AxiosBasicCredentials;
+  auth?: AxiosBasicCredentials;
   paramsSerializer?: (params: any) => string;
   baseURL?: string;
+  validateStatus?: (status: number) => Boolean;
   [propName: string]: any;
 }
 export type Method =

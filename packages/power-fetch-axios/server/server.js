@@ -77,8 +77,26 @@ router.get('/api/defendXSRF', function (req, res) {
 const __filename = router.get('/api/downloadFile', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../a.png'));
 });
-app.use(router);
 
+// 添加HTTP授权
+router.get('/api/HTTPAuthorization', function (req, res) {
+  const auth = req.headers.authorization;
+  const [type, credentials] = auth.split(' ');
+  const [username, password] = atob(credentials).split(':');
+  res.json({
+    type: type,
+    username: username,
+    password: password,
+  });
+});
+
+// 请求状态码合法性校验
+router.get('/api/checkStatus', function (req, res) {
+  res.status(304);
+  res.end();
+});
+
+app.use(router);
 const port = process.env.PORT || 3000;
 const lister = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`);

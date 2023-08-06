@@ -1,4 +1,4 @@
-import axios from '../../index';
+import axios from '../../lib/index';
 import { AxiosRequestConfig, Method, AxiosTransformer, Canceler } from '../../lib/types';
 (function () {
   // Just for you IE8
@@ -379,3 +379,26 @@ const handleFailure = () => {};
 //   .then((res) => {
 //     console.log(res);
 //   });
+
+// axios
+//   .get('/api/HTTPAuthorization', {
+//     auth: {
+//       username: 'power',
+//       password: '123456',
+//     },
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+
+// axios.get('/api/checkStatus').then((res) => {
+//   console.log(res);
+// });
+
+axios
+  .get('/api/checkStatus', {
+    validateStatus: (status) => status >= 200 && status < 400,
+  })
+  .then((res) => {
+    console.log(res);
+  });

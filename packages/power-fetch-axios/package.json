@@ -1,9 +1,9 @@
 {
-  "name": "power-axios",
+  "name": "@power88/axios",
   "version": "1.0.0",
-  "description": "",
-  "main": "./index.js",
-  "module": "./dist/esm/axios.min.js",
+  "description": "参考axios造轮子",
+  "main": "./lib/index.js",
+  "module": "./dist/esm/index.min.js",
   "type": "module",
   "scripts": {
     "build": "rollup -cw",
@@ -13,7 +13,9 @@
     "start": "nodemon ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "axios"
+  ],
   "author": "power",
   "license": "MIT",
   "devDependencies": {
@@ -47,5 +49,12 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
-  }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "types",
+    "README.md",
+    "LICENSE"
+  ]
 }
