@@ -2,9 +2,15 @@
   "name": "@power88/axios",
   "version": "0.0.3",
   "description": "参考axios造轮子",
-  "main": "./lib/index.js",
+  "main": "./lib/index.ts",
   "module": "./dist/esm/index.js",
+  "types": "./lib/index.d.ts",
   "type": "module",
+  "exports": {
+    "types": "./lib/index.d.ts",
+    "import": "./dist/esm/index.js",
+    "default": "./dist/cjs/index.js"
+  },
   "publishConfig": {
     "access": "public"
   },

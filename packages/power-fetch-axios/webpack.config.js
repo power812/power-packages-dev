@@ -65,7 +65,7 @@ const config = {
     ],
     compress: true,
     open: false,
-    port: 8000,
+    port: 8888,
     hot: true,
     // publicPath: '.',
     proxy: {

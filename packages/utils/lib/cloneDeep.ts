@@ -1,8 +1,8 @@
 import { isObject } from './is';
 export function cloneDeep(val: any) {
   if (isObject(val)) {
-    const res = {};
-    for (const key in val) {
+    const res = {} as any;
+    for (const key in val as Object) {
       res[key] = cloneDeep(val[key]);
     }
     return res;

@@ -1,155 +1,135 @@
 /** 引用 https://github.com/yangtianxia/ua-browser */
-export type HashOptions = Record<string, string>
+export type HashOptions = Record<string, string>;
 
-export type OsVersionType =
-  | 'Android'
-  | 'iOS'
-  | 'Debian'
-  | 'Windows Phone'
-  | 'MacOS'
-  | 'WebOS'
-  | 'HarmonyOS'
-  | 'Windows'
+export type OsVersionType = 'Android' | 'iOS' | 'Debian' | 'Windows Phone' | 'MacOS' | 'WebOS' | 'HarmonyOS' | 'Windows';
 
 export type EnvWebview = {
-  isWebview: boolean
-}
+  isWebview: boolean;
+};
 
-export type EnvPart = Record<'version' | 'osVersion' | 'platfrom' | 'languge', string>
+export type EnvPart = Record<'version' | 'osVersion' | 'platfrom' | 'languge', string>;
 
-export type EnvOption = EnvPart & EnvWebview & {
-  engine:
-    | 'Trident'
-    | 'Presto'
-    | 'WebKit'
-    | 'Gecko'
-    | 'KHTML'
-    | 'Blink'
-    | 'EdgeHTML'
-    | 'unknown'
-  browser:
-    | 'Safari'
-    | 'Chrome'
-    | 'IE'
-    | 'Edge'
-    | 'Firefox'
-    | 'Firefox Focus'
-    | 'Chromium'
-    | 'Opera'
-    | 'Vivaldi'
-    | 'Yandex'
-    | 'Arora'
-    | 'Lunascape'
-    | 'QupZilla'
-    | 'Coc Coc'
-    | 'Kindle'
-    | 'Iceweasel'
-    | 'Konqueror'
-    | 'Iceape'
-    | 'SeaMonkey'
-    | 'Epiphany'
-    | '360'
-    | '360EE'
-    | '360SE'
-    | 'UC'
-    | 'QQBrowser'
-    | 'QQ'
-    | 'Baidu'
-    | 'Maxthon'
-    | 'Sogou'
-    | 'Liebao'
-    | '2345Explorer'
-    | '115Browser'
-    | 'TheWorld'
-		| 'OPPO'
-    | 'XiaoMi'
-    | 'Quark'
-    | 'Qiyu'
-    | 'Wechat'
-    | 'WechatWork'
-    | 'Taobao'
-    | 'Alipay'
-    | 'Weibo'
-    | 'Douban'
-    | 'Suning'
-    | 'iQiYi'
-    | 'DingTalk'
-    | 'Huawei'
-    | 'Vivo'
-    | 'Firefox Nightly'
-    | 'Wechat Miniapp'
-		| 'Douyin'
-    | 'unknown'
-  os:
-    | 'Windows'
-    | 'Linux'
-    | 'MacOS'
-    | 'Android'
-    | 'HarmonyOS'
-    | 'Ubuntu'
-    | 'FreeBSD'
-    | 'Debian'
-    | 'Windows Phone'
-    | 'BlackBerry'
-    | 'MeeGo'
-    | 'Symbian'
-    | 'iOS'
-    | 'Chrome OS'
-    | 'WebOS'
-    | 'unknown'
-  device:
-    | 'Mobile'
-    | 'Tablet'
-    | 'Pc'
-}
+export type EnvOption = EnvPart &
+  EnvWebview & {
+    engine: 'Trident' | 'Presto' | 'WebKit' | 'Gecko' | 'KHTML' | 'Blink' | 'EdgeHTML' | 'unknown';
+    browser:
+      | 'Safari'
+      | 'Chrome'
+      | 'IE'
+      | 'Edge'
+      | 'Firefox'
+      | 'Firefox Focus'
+      | 'Chromium'
+      | 'Opera'
+      | 'Vivaldi'
+      | 'Yandex'
+      | 'Arora'
+      | 'Lunascape'
+      | 'QupZilla'
+      | 'Coc Coc'
+      | 'Kindle'
+      | 'Iceweasel'
+      | 'Konqueror'
+      | 'Iceape'
+      | 'SeaMonkey'
+      | 'Epiphany'
+      | '360'
+      | '360EE'
+      | '360SE'
+      | 'UC'
+      | 'QQBrowser'
+      | 'QQ'
+      | 'Baidu'
+      | 'Maxthon'
+      | 'Sogou'
+      | 'Liebao'
+      | '2345Explorer'
+      | '115Browser'
+      | 'TheWorld'
+      | 'OPPO'
+      | 'XiaoMi'
+      | 'Quark'
+      | 'Qiyu'
+      | 'Wechat'
+      | 'WechatWork'
+      | 'Taobao'
+      | 'Alipay'
+      | 'Weibo'
+      | 'Douban'
+      | 'Suning'
+      | 'iQiYi'
+      | 'DingTalk'
+      | 'Huawei'
+      | 'Vivo'
+      | 'Firefox Nightly'
+      | 'Wechat Miniapp'
+      | 'Douyin'
+      | 'unknown';
+    os:
+      | 'Windows'
+      | 'Linux'
+      | 'MacOS'
+      | 'Android'
+      | 'HarmonyOS'
+      | 'Ubuntu'
+      | 'FreeBSD'
+      | 'Debian'
+      | 'Windows Phone'
+      | 'BlackBerry'
+      | 'MeeGo'
+      | 'Symbian'
+      | 'iOS'
+      | 'Chrome OS'
+      | 'WebOS'
+      | 'unknown';
+    device: 'Mobile' | 'Tablet' | 'Pc';
+  };
 
-declare function uaBrowser(ua?: string): EnvOption
+declare function uaBrowser(ua?: string): EnvOption;
 
 declare namespace uaBrowser {
   /** 检查 `webview` 浏览环境，仅支持 `android` */
-  function isWebview(ua: string): boolean
+  function isWebview(ua: string): boolean;
   /** 检查微信小程序 */
-  function isWechatMiniapp(): boolean
+  function isWechatMiniapp(): boolean;
   /** 浏览器语言 */
-  function getLanguage(): string
+  function getLanguage(): string;
   /** 当前版本 */
-  const VERSION: string
+  const VERSION: string;
 }
 
-
-
 declare global {
-  const __wxjs_environment: string
+  const __wxjs_environment: string;
 
   const chrome: {
-    adblock2345: any
-    common2345: any
-  }
+    adblock2345: any;
+    common2345: any;
+  };
 
-  const showModalDialog: any
+  const showModalDialog: any;
 
-  const u2f: any
+  const u2f: any;
 
   // Navigator
   interface Navigator {
-    browserLanguage: string
-		userAgentData: Record<string, any>
-    connection: Record<string, any>
+    browserLanguage: string;
+    userAgentData: Record<string, any>;
+    connection: Record<string, any>;
   }
 }
 
-export {}
+export {};
 /** *************以上是类型代码*********** */
 
-let NAVIGATOR = {} as Navigator
+let NAVIGATOR = {} as Navigator;
 
 if (typeof navigator !== 'undefined') {
-  NAVIGATOR = navigator
+  NAVIGATOR = navigator;
 }
 
-const UA = NAVIGATOR.userAgent || ''
-const mimeTypes = NAVIGATOR.mimeTypes
-const platfrom = NAVIGATOR.platform
+const UA = NAVIGATOR.userAgent || '';
+const mimeTypes = NAVIGATOR.mimeTypes;
+const platfrom = NAVIGATOR.platform;
 
 /** 内核 */
 const engineRegExp = {
@@ -157,8 +137,8 @@ const engineRegExp = {
   Presto: /Presto/,
   WebKit: /AppleWebKit/,
   Gecko: /Gecko\//,
-  KHTML: /KHTML\//
-} as const
+  KHTML: /KHTML\//,
+} as const;
 
 /** 浏览器 */
 const browserRegExp = {
@@ -196,9 +176,9 @@ const browserRegExp = {
   '115Browser': /115Browser/,
   TheWorld: /TheWorld/,
   XiaoMi: /MiuiBrowser/,
-	Vivo: /VivoBrowser/,
-	Huawei: /HuaweiBrowser/,
-	OPPO: /HeyTapBrowser/,
+  Vivo: /VivoBrowser/,
+  Huawei: /HuaweiBrowser/,
+  OPPO: /HeyTapBrowser/,
   Quark: /Quark/,
   Qiyu: /Qiyu/,
   Wechat: /MicroMessenger/,
@@ -210,8 +190,8 @@ const browserRegExp = {
   Suning: /SNEBUY-APP/,
   iQiYi: /IqiyiApp/,
   DingTalk: /DingTalk/,
-	Douyin: /aweme/
-} as const
+  Douyin: /aweme/,
+} as const;
 
 /** 系统或平台 */
 const osRegExp = {
@@ -229,84 +209,86 @@ const osRegExp = {
   Symbian: /Symbian/,
   iOS: /like Mac OS X/,
   'Chrome OS': /CrOS/,
-  WebOS: /hpwOS/
-} as const
+  WebOS: /hpwOS/,
+} as const;
 
 /** 设备 */
 const deviceRegExp = {
   Mobile: /(Mobi|iPh|480)/,
-  Tablet: /(Tablet|Pad|Nexus 7)/
-} as const
+  Tablet: /(Tablet|Pad|Nexus 7)/,
+} as const;
 
 /** 环境 */
 const envRegExp = {
-  isWebview: /; wv/
-} as const
+  isWebview: /; wv/,
+} as const;
 
 const hash = {
-	os: Object.keys(osRegExp),
+  os: Object.keys(osRegExp),
   device: Object.keys(deviceRegExp),
   engine: Object.keys(engineRegExp),
-  browser: Object.keys(browserRegExp)
-}
+  browser: Object.keys(browserRegExp),
+};
 
 const getMimeType = (value: string) => {
   try {
-    return !!mimeTypes.namedItem(value)
+    return !!mimeTypes.namedItem(value);
   } catch (e) {
-    return false
+    return false;
   }
-}
+};
 
-const getValueOf = (
-  values: string[],
-  reg: Record<string, RegExp>,
-  ua = UA
-) => {
-  let i = values.length
+const getValueOf = (values: string[], reg: Record<string, RegExp>, ua = UA) => {
+  let i = values.length;
   while (i--) {
-    const value = values[i]
-    if (reg[value].test(ua)) return value
+    const value = values[i];
+    if (reg[value].test(ua)) return value;
   }
-  return 'unknown'
-}
+  return 'unknown';
+};
 
-let _windowVersion: string | null
+let _windowVersion: string | null;
 
 if (NAVIGATOR?.userAgentData) {
-	NAVIGATOR
-		.userAgentData
-		.getHighEntropyValues(['platformVersion'])
-			.then(function (ua: Record<string, any>) {
-				if (NAVIGATOR.userAgentData.platform === 'Windows') {
-					const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0])
-					if (majorPlatformVersion >= 13) {
-						_windowVersion = '11'
-					} else {
-						_windowVersion = '10'
-					}
-				}
-			})
+  NAVIGATOR.userAgentData.getHighEntropyValues(['platformVersion']).then(function (ua: Record<string, any>) {
+    if (NAVIGATOR.userAgentData.platform === 'Windows') {
+      const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+      if (majorPlatformVersion >= 13) {
+        _windowVersion = '11';
+      } else {
+        _windowVersion = '10';
+      }
+    }
+  });
 }
 
-export const getLanguage = () => (NAVIGATOR.browserLanguage || NAVIGATOR.language)?.replace(/-\w+/g, (word) => word.toUpperCase())
+export const getLanguage = () => (NAVIGATOR.browserLanguage || NAVIGATOR.language)?.replace(/-\w+/g, (word) => word.toUpperCase());
 
-export const isWechatMiniapp = () => typeof __wxjs_environment !== 'undefined' && __wxjs_environment === 'miniprogram'
+export const isWechatMiniapp = () => typeof __wxjs_environment !== 'undefined' && __wxjs_environment === 'miniprogram';
 
-export const isWebview = (ua: string) => envRegExp.isWebview.test(ua)
+export const isWebview = (ua: string) => envRegExp.isWebview.test(ua);
 
 export class UaBrowser {
-  private ua = UA
+  private ua = UA;
 
   private version = {
     Safari: () => this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1'),
     Chrome: () => this.ua.replace(/^.*Chrome\/([\d.]+).*$/, '$1').replace(/^.*CriOS\/([\d.]+).*$/, '$1'),
     IE: () => this.ua.replace(/^.*MSIE ([\d.]+).*$/, '$1').replace(/^.*rv:([\d.]+).*$/, '$1'),
-    Edge: () => this.ua.replace(/^.*Edge\/([\d.]+).*$/, '$1').replace(/^.*Edg\/([\d.]+).*$/, '$1').replace(/^.*EdgA\/([\d.]+).*$/, '$1').replace(/^.*EdgiOS\/([\d.]+).*$/, '$1'),
+    Edge: () =>
+      this.ua
+        .replace(/^.*Edge\/([\d.]+).*$/, '$1')
+        .replace(/^.*Edg\/([\d.]+).*$/, '$1')
+        .replace(/^.*EdgA\/([\d.]+).*$/, '$1')
+        .replace(/^.*EdgiOS\/([\d.]+).*$/, '$1'),
     Firefox: () => this.ua.replace(/^.*Firefox\/([\d.]+).*$/, '$1').replace(/^.*FxiOS\/([\d.]+).*$/, '$1'),
     'Firefox Focus': () => this.ua.replace(/^.*Focus\/([\d.]+).*$/, '$1'),
     Chromium: () => this.ua.replace(/^.*Chromium\/([\d.]+).*$/, '$1'),
-    Opera: () => this.ua.replace(/^.*Opera\/([\d.]+).*$/, '$1').replace(/^.*OPR\/([\d.]+).*$/, '$1').replace(/^.*OPT\/([\d.]+).*$/, '$1'),
+    Opera: () =>
+      this.ua
+        .replace(/^.*Opera\/([\d.]+).*$/, '$1')
+        .replace(/^.*OPR\/([\d.]+).*$/, '$1')
+        .replace(/^.*OPT\/([\d.]+).*$/, '$1'),
     Vivaldi: () => this.ua.replace(/^.*Vivaldi\/([\d.]+).*$/, '$1'),
     Yandex: () => this.ua.replace(/^.*YaBrowser\/([\d.]+).*$/, '$1'),
     Arora: () => this.ua.replace(/^.*Arora\/([\d.]+).*$/, '$1'),
@@ -328,7 +310,7 @@ export class UaBrowser {
     TheWorld: () => this.ua.replace(/^.*TheWorld ([\d.]+).*$/, '$1'),
     XiaoMi: () => this.ua.replace(/^.*MiuiBrowser\/([\d.]+).*$/, '$1'),
     Vivo: () => this.ua.replace(/^.*VivoBrowser\/([\d.]+).*$/, '$1'),
-		OPPO: () => this.ua.replace(/^.*HeyTapBrowser\/([\d.]+).*$/, '$1'),
+    OPPO: () => this.ua.replace(/^.*HeyTapBrowser\/([\d.]+).*$/, '$1'),
     Quark: () => this.ua.replace(/^.*Quark\/([\d.]+).*$/, '$1'),
     Qiyu: () => this.ua.replace(/^.*Qiyu\/([\d.]+).*$/, '$1'),
     Wechat: () => this.ua.replace(/^.*MicroMessenger\/([\d.]+).*$/, '$1'),
@@ -341,13 +323,13 @@ export class UaBrowser {
     iQiYi: () => this.ua.replace(/^.*IqiyiVersion\/([\d.]+).*$/, '$1'),
     DingTalk: () => this.ua.replace(/^.*DingTalk\/([\d.]+).*$/, '$1'),
     Huawei: () => this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1').replace(/^.*HuaweiBrowser\/([\d.]+).*$/, '$1'),
-		Douyin: () => this.ua.replace(/^.*app_version\/([\d.]+).*$/, '$1'),
+    Douyin: () => this.ua.replace(/^.*app_version\/([\d.]+).*$/, '$1'),
     '115Browser': () => this.ua.replace(/^.*115Browser\/([\d.]+).*$/, '$1'),
     '360': () => this.ua.replace(/^.*QihooBrowser\/([\d.]+).*$/, '$1'),
     '360SE': () => {
-      const vers = this.getChromeVars()
+      const vers = this.getChromeVars();
       const hash: HashOptions = {
-				'108': '14.0',
+        '108': '14.0',
         '86': '13.0',
         '78': '12.0',
         '69': '11.0',
@@ -356,12 +338,12 @@ export class UaBrowser {
         '45': '8.1',
         '42': '8.0',
         '31': '7.0',
-        '21': '6.3'
-      }
-      return hash[vers] || ''
+        '21': '6.3',
+      };
+      return hash[vers] || '';
     },
     '360EE': () => {
-      const vers = this.getChromeVars()
+      const vers = this.getChromeVars();
       const hash: HashOptions = {
         '86': '13.0',
         '78': '12.0',
@@ -369,24 +351,24 @@ export class UaBrowser {
         '63': '9.5',
         '55': '9.0',
         '50': '8.7',
-        '30': '7.5'
-      }
-      return hash[vers] || ''
+        '30': '7.5',
+      };
+      return hash[vers] || '';
     },
     '2345Explorer': () => {
-      const vers = this.getChromeVars()
+      const vers = this.getChromeVars();
       const hash: HashOptions = {
         '69': '10.0',
-        '55': '9.9'
-      }
-      return hash[vers] || this.ua.replace(/^.*2345Explorer\/([\d.]+).*$/, '$1').replace(/^.*Mb2345Browser\/([\d.]+).*$/, '$1')
+        '55': '9.9',
+      };
+      return hash[vers] || this.ua.replace(/^.*2345Explorer\/([\d.]+).*$/, '$1').replace(/^.*Mb2345Browser\/([\d.]+).*$/, '$1');
     },
     Liebao: () => {
-      let _version = ''
+      let _version = '';
       if (/LieBaoFast/.test(this.ua)) {
-        _version = this.ua.replace(/^.*LieBaoFast\/([\d.]+).*$/, '$1')
+        _version = this.ua.replace(/^.*LieBaoFast\/([\d.]+).*$/, '$1');
       }
-      const vers = this.getChromeVars()
+      const vers = this.getChromeVars();
       const hash: HashOptions = {
         '57': '6.5',
         '49': '6.0',
@@ -395,11 +377,11 @@ export class UaBrowser {
         '39': '5.2',
         '34': '5.0',
         '29': '4.5',
-        '21': '4.0'
-      }
-      return _version || hash[vers] || ''
-    }
-  }
+        '21': '4.0',
+      };
+      return _version || hash[vers] || '';
+    },
+  };
 
   private osVersion = {
     Android: () => this.ua.replace(/^.*Android ([\d.]+);.*$/, '$1'),
@@ -409,14 +391,14 @@ export class UaBrowser {
     MacOS: () => this.ua.replace(/^.*Mac OS X -?([\d_]+).*$/, '$1').replace(/_/g, '.'),
     WebOS: () => this.ua.replace(/^.*hpwOS\/([\d.]+);.*$/, '$1'),
     HarmonyOS: () => {
-      const vers = this.ua.replace(/^Mozilla.*Android ([\d.]+)[;)].*$/, '$1')
+      const vers = this.ua.replace(/^Mozilla.*Android ([\d.]+)[;)].*$/, '$1');
       const hash: HashOptions = {
-        '10': '2'
-      }
-      return hash[vers] || ''
+        '10': '2',
+      };
+      return hash[vers] || '';
     },
     Windows: () => {
-      const vers = this.ua.replace(/^Mozilla\/\d.0 \(Windows NT ([\d.]+);.*$/, '$1')
+      const vers = this.ua.replace(/^Mozilla\/\d.0 \(Windows NT ([\d.]+);.*$/, '$1');
       const hash: HashOptions = {
         '10': '10',
         '6.4': '10',
@@ -426,51 +408,51 @@ export class UaBrowser {
         '6.0': 'Vista',
         '5.2': 'XP',
         '5.1': 'XP',
-        '5.0': '2000'
-      }
-      return hash[vers] || parseInt(vers).toString()
-    }
+        '5.0': '2000',
+      };
+      return hash[vers] || parseInt(vers).toString();
+    },
+  };
+
+  private getOs() {
+    return getValueOf(hash.os, osRegExp, this.ua);
   }
 
-  private getOs () {
-    return getValueOf(hash.os, osRegExp, this.ua)
+  private getEngine() {
+    return getValueOf(hash.engine, engineRegExp, this.ua);
   }
 
-  private getEngine () {
-    return getValueOf(hash.engine, engineRegExp, this.ua)
+  private getBrowser() {
+    return getValueOf(hash.browser, browserRegExp, this.ua);
   }
 
-  private getBrowser () {
-    return getValueOf(hash.browser, browserRegExp, this.ua)
-  }
-
-  private getDevice () {
+  private getDevice() {
     if (platfrom === 'MacIntel' && NAVIGATOR.maxTouchPoints > 1) {
-      return 'Tablet'
+      return 'Tablet';
     }
-    const device = getValueOf(hash.device, deviceRegExp, this.ua)
-    return device === 'unknown' ? 'PC' : device
+    const device = getValueOf(hash.device, deviceRegExp, this.ua);
+    return device === 'unknown' ? 'PC' : device;
   }
 
-	private getChromeVars = () => this.ua.replace(/^.*Chrome\/([\d]+).*$/, '$1')
+  private getChromeVars = () => this.ua.replace(/^.*Chrome\/([\d]+).*$/, '$1');
 
-	private setUA(ua?: string) {
-		if (typeof ua === 'string') {
-			this.ua = ua
-		} else {
-			if (typeof ua !== 'undefined') {
-				console.warn('`ua` must be of type string.')
-			}
-			this.ua = UA
-		}
-	}
+  private setUA(ua?: string) {
+    if (typeof ua === 'string') {
+      this.ua = ua;
+    } else {
+      if (typeof ua !== 'undefined') {
+        console.warn('`ua` must be of type string.');
+      }
+      this.ua = UA;
+    }
+  }
 
-  constructor (ua?: string) {
-		this.setUA(ua)
-	}
+  constructor(ua?: string) {
+    this.setUA(ua);
+  }
 
- getEnv (ua?: string) {
-    this.setUA(ua)
+  getEnv(ua?: string) {
+    this.setUA(ua);
 
     const env = {
       version: 'unknown',
@@ -481,86 +463,90 @@ export class UaBrowser {
       device: this.getDevice(),
       isWebview: isWebview(this.ua),
       language: getLanguage() ?? 'unknown',
-      platfrom: platfrom ?? 'unknown'
-    }
+      platfrom: platfrom ?? 'unknown',
+    };
 
-    let browser = env.browser
-    let is360 = false
+    let browser = env.browser;
+    let is360 = false;
 
     if (typeof chrome !== 'undefined') {
-      const vers = this.getChromeVars()
+      const vers = this.getChromeVars();
 
       if (chrome.adblock2345 || chrome.common2345) {
-        env.browser = '2345Explorer'
-      } else if (getMimeType('application/360softmgrplugin') || getMimeType('application/mozilla-npqihooquicklogin') || (vers > '36' && typeof showModalDialog !== 'undefined')) {
-        is360 = true
+        env.browser = '2345Explorer';
+      } else if (
+        getMimeType('application/360softmgrplugin') ||
+        getMimeType('application/mozilla-npqihooquicklogin') ||
+        (vers > '36' && typeof showModalDialog !== 'undefined')
+      ) {
+        is360 = true;
       } else if (vers > '45') {
-        is360 = getMimeType('application/vnd.chromium.remoting-viewer')
+        is360 = getMimeType('application/vnd.chromium.remoting-viewer');
 
         if (!is360 && vers >= '69') {
-          is360 = getMimeType('application/hwepass2001.installepass2001') || getMimeType('application/asx')
+          is360 = getMimeType('application/hwepass2001.installepass2001') || getMimeType('application/asx');
         }
       }
     }
 
     if (env.device === 'Mobile' && /iPad/.test(this.ua)) {
-      env.device = 'Tablet'
+      env.device = 'Tablet';
     } else if (is360) {
       if (getMimeType('application/gameplugin') || !NAVIGATOR?.connection?.saveData) {
-        browser = '360SE'
+        browser = '360SE';
       } else {
-        browser = '360EE'
+        browser = '360EE';
       }
     }
 
     if (hash.browser.indexOf(browser) >= hash.browser.indexOf(env.browser)) {
-      env.browser = browser
+      env.browser = browser;
     }
 
     if (env.browser === 'Baidu' && browserRegExp.Opera.test(this.ua)) {
-      env.browser = 'Opera'
+      env.browser = 'Opera';
     }
 
     if (env.os in this.osVersion) {
-      env.osVersion = this.osVersion[env.os as OsVersionType]()
+      env.osVersion = this.osVersion[env.os as OsVersionType]();
 
       if (env.osVersion === this.ua) {
-        env.osVersion = 'unknown'
+        env.osVersion = 'unknown';
       }
     }
 
-		if (env.os === 'Windows' && _windowVersion) {
-			env.osVersion = _windowVersion
-		}
+    if (env.os === 'Windows' && _windowVersion) {
+      env.osVersion = _windowVersion;
+    }
 
     if (env.browser in this.version) {
-      env.version = this.version[env.browser as keyof typeof browserRegExp]()
+      env.version = this.version[env.browser as keyof typeof browserRegExp]();
 
       if (env.version === this.ua) {
-        env.version = 'unknown'
+        env.version = 'unknown';
       }
     }
 
     if (env.browser === 'Chrome' && this.ua.match(/\S+Browser/)) {
-      env.browser = this.ua.match(/\S+Browser/)![0] as any
-      env.version = this.ua.replace(/^.*Browser\/([\d.]+).*$/, '$1')
+      env.browser = this.ua.match(/\S+Browser/)![0] as any;
+      env.version = this.ua.replace(/^.*Browser\/([\d.]+).*$/, '$1');
     } else if (env.browser === 'Firefox' && (typeof clientInformation !== 'undefined' || !(typeof u2f !== 'undefined'))) {
-      env.browser = `${env.browser} Nightly`
+      env.browser = `${env.browser} Nightly`;
     } else if (env.browser === 'Wechat' && isWechatMiniapp()) {
-      env.browser = 'Wechat Miniapp'
+      env.browser = 'Wechat Miniapp';
     }
 
     if (env.browser === 'Edge') {
-      env.engine = parseInt(env.version) > 75 ? 'Blink' : 'EdgeHTML'
+      env.engine = parseInt(env.version) > 75 ? 'Blink' : 'EdgeHTML';
     } else if (
       (browserRegExp.Chrome.test(this.ua) && env.engine === 'WebKit' && parseInt(this.version.Chrome()) > 27) ||
       (env.browser === 'Opera' && parseInt(env.version) > 12) ||
-      (env.browser === 'Yandex')
+      env.browser === 'Yandex'
     ) {
-      env.engine = 'Blink'
+      env.engine = 'Blink';
     }
 
-    return env
+    return env;
   }
 }
-export default new UaBrowser().getEnv()
+export default new UaBrowser().getEnv();

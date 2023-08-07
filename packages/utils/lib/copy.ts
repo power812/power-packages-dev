@@ -1,6 +1,6 @@
 export async function copy(command: string) {
   if (navigator.clipboard.writeText) {
-    return navigator.clipboard.writeText(command);
+    navigator.clipboard.writeText(command);
   } else {
     // 旧
     const input = document.createElement('input');

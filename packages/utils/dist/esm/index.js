@@ -1,5 +1,76 @@
-// Axios v1.0.0 Copyright (c) 2023  and contributors
-const toString$1 = Object.prototype.toString;
+// @power88/utils  v0.0.3 Copyright (c) 2023  and contributors
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+var toString$1 = Object.prototype.toString;
 function isDate$1(val) {
     return toString$1.call(val) === '[object Date]';
 }
@@ -19,8 +90,8 @@ const is = /*#__PURE__*/Object.freeze({
 
 function cloneDeep(val) {
     if (isObject$1(val)) {
-        const res = {};
-        for (const key in val) {
+        var res = {};
+        for (var key in val) {
             res[key] = cloneDeep(val[key]);
         }
         return res;
@@ -3241,80 +3312,78 @@ axios.default = axios;
 // this module should only have a default export
 const axios$1 = axios;
 
-const BASE_URL = 'http://localhost:7001';
-const request = axios$1.create({
+// import axios from '@power88/axios';
+// import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from '@power88/axios';
+var BASE_URL = 'http://localhost:7001';
+var request = axios$1.create({
     baseURL: BASE_URL,
     timeout: 5000,
 });
-request.interceptors.request.use((config) => {
+request.interceptors.request.use(function (config) {
     return config;
-}, (error) => {
+}, function (error) {
     return Promise.reject(error);
 });
-request.interceptors.response.use((response) => {
+request.interceptors.response.use(function (response) {
     return response.data;
-}, (err) => {
+}, function (err) {
     return Promise.reject(err);
 });
-
-/******************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise, SuppressedError, Symbol */
-
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
-    var e = new Error(message);
-    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
-};
+/* 导出封装的请求方法 */
+// export const http = {
+//   get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+//     return request.get(url, config);
+//   },
+//   post<T = any>(
+//     url: string,
+//     data?: object,
+//     config?: AxiosRequestConfig,
+//   ): Promise<T> {
+//     return request.post(url, data, config);
+//   },
+//   put<T = any>(
+//     url: string,
+//     data?: object,
+//     config?: AxiosRequestConfig,
+//   ): Promise<T> {
+//     return request.put(url, data, config);
+//   },
+//   delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+//     return request.delete(url, config);
+//   },
+// };
 
 function copy(command) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (navigator.clipboard.writeText) {
-            return navigator.clipboard.writeText(command);
-        }
-        else {
-            const input = document.createElement('input');
-            input.value = command;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('Copy');
-            input.className = 'input';
-            input.style.display = 'none';
-        }
+    return __awaiter(this, void 0, void 0, function () {
+        var input;
+        return __generator(this, function (_a) {
+            if (navigator.clipboard.writeText) {
+                return [2 /*return*/, navigator.clipboard.writeText(command)];
+            }
+            else {
+                input = document.createElement('input');
+                input.value = command;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('Copy');
+                input.className = 'input';
+                input.style.display = 'none';
+            }
+            return [2 /*return*/];
+        });
     });
 }
 
+// 获取search的值（来自红宝书）
 function getQueryStringArgs(key) {
-    const qs = (location.search.length > 0 ? location.search.substring(1) : '');
-    const args = {};
-    const items = qs.length ? qs.split('&') : [];
-    let name = null;
-    let value = null;
+    var qs = location.search.length > 0 ? location.search.substring(1) : '';
+    var args = {};
+    var items = qs.length ? qs.split('&') : [];
+    var name = null;
+    var value = null;
     items.length;
-    items.forEach(item => {
-        let itemArr = item.split('=');
+    items.forEach(function (item) {
+        var itemArr = item.split('=');
         name = decodeURIComponent(itemArr[0]);
         value = decodeURIComponent(itemArr[1]);
         if (name.length) {
@@ -3324,21 +3393,24 @@ function getQueryStringArgs(key) {
     return args[key] || '';
 }
 
-let NAVIGATOR = {};
+/** *************以上是类型代码*********** */
+var NAVIGATOR = {};
 if (typeof navigator !== 'undefined') {
     NAVIGATOR = navigator;
 }
-const UA = NAVIGATOR.userAgent || '';
-const mimeTypes = NAVIGATOR.mimeTypes;
-const platfrom = NAVIGATOR.platform;
-const engineRegExp = {
+var UA = NAVIGATOR.userAgent || '';
+var mimeTypes = NAVIGATOR.mimeTypes;
+var platfrom = NAVIGATOR.platform;
+/** 内核 */
+var engineRegExp = {
     Trident: /(Trident|NET CLR)/,
     Presto: /Presto/,
     WebKit: /AppleWebKit/,
     Gecko: /Gecko\//,
-    KHTML: /KHTML\//
+    KHTML: /KHTML\//,
 };
-const browserRegExp = {
+/** 浏览器 */
+var browserRegExp = {
     Safari: /Safari/,
     Chrome: /(Chrome|CriOS)/,
     IE: /(MSIE|Trident)/,
@@ -3387,9 +3459,10 @@ const browserRegExp = {
     Suning: /SNEBUY-APP/,
     iQiYi: /IqiyiApp/,
     DingTalk: /DingTalk/,
-    Douyin: /aweme/
+    Douyin: /aweme/,
 };
-const osRegExp = {
+/** 系统或平台 */
+var osRegExp = {
     Windows: /Windows/,
     Linux: /(Linux|X11)/,
     MacOS: /Macintosh/,
@@ -3404,22 +3477,24 @@ const osRegExp = {
     Symbian: /Symbian/,
     iOS: /like Mac OS X/,
     'Chrome OS': /CrOS/,
-    WebOS: /hpwOS/
+    WebOS: /hpwOS/,
 };
-const deviceRegExp = {
+/** 设备 */
+var deviceRegExp = {
     Mobile: /(Mobi|iPh|480)/,
-    Tablet: /(Tablet|Pad|Nexus 7)/
+    Tablet: /(Tablet|Pad|Nexus 7)/,
 };
-const envRegExp = {
-    isWebview: /; wv/
+/** 环境 */
+var envRegExp = {
+    isWebview: /; wv/,
 };
-const hash = {
+var hash = {
     os: Object.keys(osRegExp),
     device: Object.keys(deviceRegExp),
     engine: Object.keys(engineRegExp),
-    browser: Object.keys(browserRegExp)
+    browser: Object.keys(browserRegExp),
 };
-const getMimeType = (value) => {
+var getMimeType = function (value) {
     try {
         return !!mimeTypes.namedItem(value);
     }
@@ -3427,23 +3502,21 @@ const getMimeType = (value) => {
         return false;
     }
 };
-const getValueOf = (values, reg, ua = UA) => {
-    let i = values.length;
+var getValueOf = function (values, reg, ua) {
+    if (ua === void 0) { ua = UA; }
+    var i = values.length;
     while (i--) {
-        const value = values[i];
+        var value = values[i];
         if (reg[value].test(ua))
             return value;
     }
     return 'unknown';
 };
-let _windowVersion;
+var _windowVersion;
 if (NAVIGATOR === null || NAVIGATOR === void 0 ? void 0 : NAVIGATOR.userAgentData) {
-    NAVIGATOR
-        .userAgentData
-        .getHighEntropyValues(['platformVersion'])
-        .then(function (ua) {
+    NAVIGATOR.userAgentData.getHighEntropyValues(['platformVersion']).then(function (ua) {
         if (NAVIGATOR.userAgentData.platform === 'Windows') {
-            const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+            var majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
             if (majorPlatformVersion >= 13) {
                 _windowVersion = '11';
             }
@@ -3453,88 +3526,73 @@ if (NAVIGATOR === null || NAVIGATOR === void 0 ? void 0 : NAVIGATOR.userAgentDat
         }
     });
 }
-const getLanguage = () => { var _a; return (_a = (NAVIGATOR.browserLanguage || NAVIGATOR.language)) === null || _a === void 0 ? void 0 : _a.replace(/-\w+/g, (word) => word.toUpperCase()); };
-const isWechatMiniapp = () => typeof __wxjs_environment !== 'undefined' && __wxjs_environment === 'miniprogram';
-const isWebview = (ua) => envRegExp.isWebview.test(ua);
-class UaBrowser {
-    getOs() {
-        return getValueOf(hash.os, osRegExp, this.ua);
-    }
-    getEngine() {
-        return getValueOf(hash.engine, engineRegExp, this.ua);
-    }
-    getBrowser() {
-        return getValueOf(hash.browser, browserRegExp, this.ua);
-    }
-    getDevice() {
-        if (platfrom === 'MacIntel' && NAVIGATOR.maxTouchPoints > 1) {
-            return 'Tablet';
-        }
-        const device = getValueOf(hash.device, deviceRegExp, this.ua);
-        return device === 'unknown' ? 'PC' : device;
-    }
-    setUA(ua) {
-        if (typeof ua === 'string') {
-            this.ua = ua;
-        }
-        else {
-            if (typeof ua !== 'undefined') {
-                console.warn('`ua` must be of type string.');
-            }
-            this.ua = UA;
-        }
-    }
-    constructor(ua) {
+var getLanguage = function () { var _a; return (_a = (NAVIGATOR.browserLanguage || NAVIGATOR.language)) === null || _a === void 0 ? void 0 : _a.replace(/-\w+/g, function (word) { return word.toUpperCase(); }); };
+var isWechatMiniapp = function () { return typeof __wxjs_environment !== 'undefined' && __wxjs_environment === 'miniprogram'; };
+var isWebview = function (ua) { return envRegExp.isWebview.test(ua); };
+var UaBrowser = /** @class */ (function () {
+    function UaBrowser(ua) {
+        var _this = this;
         this.ua = UA;
         this.version = {
-            Safari: () => this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1'),
-            Chrome: () => this.ua.replace(/^.*Chrome\/([\d.]+).*$/, '$1').replace(/^.*CriOS\/([\d.]+).*$/, '$1'),
-            IE: () => this.ua.replace(/^.*MSIE ([\d.]+).*$/, '$1').replace(/^.*rv:([\d.]+).*$/, '$1'),
-            Edge: () => this.ua.replace(/^.*Edge\/([\d.]+).*$/, '$1').replace(/^.*Edg\/([\d.]+).*$/, '$1').replace(/^.*EdgA\/([\d.]+).*$/, '$1').replace(/^.*EdgiOS\/([\d.]+).*$/, '$1'),
-            Firefox: () => this.ua.replace(/^.*Firefox\/([\d.]+).*$/, '$1').replace(/^.*FxiOS\/([\d.]+).*$/, '$1'),
-            'Firefox Focus': () => this.ua.replace(/^.*Focus\/([\d.]+).*$/, '$1'),
-            Chromium: () => this.ua.replace(/^.*Chromium\/([\d.]+).*$/, '$1'),
-            Opera: () => this.ua.replace(/^.*Opera\/([\d.]+).*$/, '$1').replace(/^.*OPR\/([\d.]+).*$/, '$1').replace(/^.*OPT\/([\d.]+).*$/, '$1'),
-            Vivaldi: () => this.ua.replace(/^.*Vivaldi\/([\d.]+).*$/, '$1'),
-            Yandex: () => this.ua.replace(/^.*YaBrowser\/([\d.]+).*$/, '$1'),
-            Arora: () => this.ua.replace(/^.*Arora\/([\d.]+).*$/, '$1'),
-            Lunascape: () => this.ua.replace(/^.*Lunascape[\s]([\d.]+).*$/, '$1'),
-            QupZilla: () => this.ua.replace(/^.*QupZilla[\s]([\d.]+).*$/, '$1'),
-            'Coc Coc': () => this.ua.replace(/^.*coc_coc_browser\/([\d.]+).*$/, '$1'),
-            Kindle: () => this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1'),
-            Iceweasel: () => this.ua.replace(/^.*Iceweasel\/([\d.]+).*$/, '$1'),
-            Konqueror: () => this.ua.replace(/^.*Konqueror\/([\d.]+).*$/, '$1'),
-            Iceape: () => this.ua.replace(/^.*Iceape\/([\d.]+).*$/, '$1'),
-            SeaMonkey: () => this.ua.replace(/^.*SeaMonkey\/([\d.]+).*$/, '$1'),
-            Epiphany: () => this.ua.replace(/^.*Epiphany\/([\d.]+).*$/, '$1'),
-            Maxthon: () => this.ua.replace(/^.*Maxthon\/([\d.]+).*$/, '$1'),
-            QQBrowser: () => this.ua.replace(/^.*QQBrowser\/([\d.]+).*$/, '$1'),
-            QQ: () => this.ua.replace(/^.*QQ\/([\d.]+).*$/, '$1'),
-            Baidu: () => this.ua.replace(/^.*BIDUBrowser[\s/]([\d.]+).*$/, '$1').replace(/^.*baiduboxapp\/([\d.]+).*$/, '$1'),
-            UC: () => this.ua.replace(/^.*UC?Browser\/([\d.]+).*$/, '$1'),
-            Sogou: () => this.ua.replace(/^.*SE ([\d.X]+).*$/, '$1').replace(/^.*SogouMobileBrowser\/([\d.]+).*$/, '$1'),
-            TheWorld: () => this.ua.replace(/^.*TheWorld ([\d.]+).*$/, '$1'),
-            XiaoMi: () => this.ua.replace(/^.*MiuiBrowser\/([\d.]+).*$/, '$1'),
-            Vivo: () => this.ua.replace(/^.*VivoBrowser\/([\d.]+).*$/, '$1'),
-            OPPO: () => this.ua.replace(/^.*HeyTapBrowser\/([\d.]+).*$/, '$1'),
-            Quark: () => this.ua.replace(/^.*Quark\/([\d.]+).*$/, '$1'),
-            Qiyu: () => this.ua.replace(/^.*Qiyu\/([\d.]+).*$/, '$1'),
-            Wechat: () => this.ua.replace(/^.*MicroMessenger\/([\d.]+).*$/, '$1'),
-            WechatWork: () => this.ua.replace(/^.*wxwork\/([\d.]+).*$/, '$1'),
-            Taobao: () => this.ua.replace(/^.*AliApp\(TB\/([\d.]+).*$/, '$1'),
-            Alipay: () => this.ua.replace(/^.*AliApp\(AP\/([\d.]+).*$/, '$1'),
-            Weibo: () => this.ua.replace(/^.*weibo__([\d.]+).*$/, '$1'),
-            Douban: () => this.ua.replace(/^.*com.douban.frodo\/([\d.]+).*$/, '$1'),
-            Suning: () => this.ua.replace(/^.*SNEBUY-APP([\d.]+).*$/, '$1'),
-            iQiYi: () => this.ua.replace(/^.*IqiyiVersion\/([\d.]+).*$/, '$1'),
-            DingTalk: () => this.ua.replace(/^.*DingTalk\/([\d.]+).*$/, '$1'),
-            Huawei: () => this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1').replace(/^.*HuaweiBrowser\/([\d.]+).*$/, '$1'),
-            Douyin: () => this.ua.replace(/^.*app_version\/([\d.]+).*$/, '$1'),
-            '115Browser': () => this.ua.replace(/^.*115Browser\/([\d.]+).*$/, '$1'),
-            '360': () => this.ua.replace(/^.*QihooBrowser\/([\d.]+).*$/, '$1'),
-            '360SE': () => {
-                const vers = this.getChromeVars();
-                const hash = {
+            Safari: function () { return _this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1'); },
+            Chrome: function () { return _this.ua.replace(/^.*Chrome\/([\d.]+).*$/, '$1').replace(/^.*CriOS\/([\d.]+).*$/, '$1'); },
+            IE: function () { return _this.ua.replace(/^.*MSIE ([\d.]+).*$/, '$1').replace(/^.*rv:([\d.]+).*$/, '$1'); },
+            Edge: function () {
+                return _this.ua
+                    .replace(/^.*Edge\/([\d.]+).*$/, '$1')
+                    .replace(/^.*Edg\/([\d.]+).*$/, '$1')
+                    .replace(/^.*EdgA\/([\d.]+).*$/, '$1')
+                    .replace(/^.*EdgiOS\/([\d.]+).*$/, '$1');
+            },
+            Firefox: function () { return _this.ua.replace(/^.*Firefox\/([\d.]+).*$/, '$1').replace(/^.*FxiOS\/([\d.]+).*$/, '$1'); },
+            'Firefox Focus': function () { return _this.ua.replace(/^.*Focus\/([\d.]+).*$/, '$1'); },
+            Chromium: function () { return _this.ua.replace(/^.*Chromium\/([\d.]+).*$/, '$1'); },
+            Opera: function () {
+                return _this.ua
+                    .replace(/^.*Opera\/([\d.]+).*$/, '$1')
+                    .replace(/^.*OPR\/([\d.]+).*$/, '$1')
+                    .replace(/^.*OPT\/([\d.]+).*$/, '$1');
+            },
+            Vivaldi: function () { return _this.ua.replace(/^.*Vivaldi\/([\d.]+).*$/, '$1'); },
+            Yandex: function () { return _this.ua.replace(/^.*YaBrowser\/([\d.]+).*$/, '$1'); },
+            Arora: function () { return _this.ua.replace(/^.*Arora\/([\d.]+).*$/, '$1'); },
+            Lunascape: function () { return _this.ua.replace(/^.*Lunascape[\s]([\d.]+).*$/, '$1'); },
+            QupZilla: function () { return _this.ua.replace(/^.*QupZilla[\s]([\d.]+).*$/, '$1'); },
+            'Coc Coc': function () { return _this.ua.replace(/^.*coc_coc_browser\/([\d.]+).*$/, '$1'); },
+            Kindle: function () { return _this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1'); },
+            Iceweasel: function () { return _this.ua.replace(/^.*Iceweasel\/([\d.]+).*$/, '$1'); },
+            Konqueror: function () { return _this.ua.replace(/^.*Konqueror\/([\d.]+).*$/, '$1'); },
+            Iceape: function () { return _this.ua.replace(/^.*Iceape\/([\d.]+).*$/, '$1'); },
+            SeaMonkey: function () { return _this.ua.replace(/^.*SeaMonkey\/([\d.]+).*$/, '$1'); },
+            Epiphany: function () { return _this.ua.replace(/^.*Epiphany\/([\d.]+).*$/, '$1'); },
+            Maxthon: function () { return _this.ua.replace(/^.*Maxthon\/([\d.]+).*$/, '$1'); },
+            QQBrowser: function () { return _this.ua.replace(/^.*QQBrowser\/([\d.]+).*$/, '$1'); },
+            QQ: function () { return _this.ua.replace(/^.*QQ\/([\d.]+).*$/, '$1'); },
+            Baidu: function () { return _this.ua.replace(/^.*BIDUBrowser[\s/]([\d.]+).*$/, '$1').replace(/^.*baiduboxapp\/([\d.]+).*$/, '$1'); },
+            UC: function () { return _this.ua.replace(/^.*UC?Browser\/([\d.]+).*$/, '$1'); },
+            Sogou: function () { return _this.ua.replace(/^.*SE ([\d.X]+).*$/, '$1').replace(/^.*SogouMobileBrowser\/([\d.]+).*$/, '$1'); },
+            TheWorld: function () { return _this.ua.replace(/^.*TheWorld ([\d.]+).*$/, '$1'); },
+            XiaoMi: function () { return _this.ua.replace(/^.*MiuiBrowser\/([\d.]+).*$/, '$1'); },
+            Vivo: function () { return _this.ua.replace(/^.*VivoBrowser\/([\d.]+).*$/, '$1'); },
+            OPPO: function () { return _this.ua.replace(/^.*HeyTapBrowser\/([\d.]+).*$/, '$1'); },
+            Quark: function () { return _this.ua.replace(/^.*Quark\/([\d.]+).*$/, '$1'); },
+            Qiyu: function () { return _this.ua.replace(/^.*Qiyu\/([\d.]+).*$/, '$1'); },
+            Wechat: function () { return _this.ua.replace(/^.*MicroMessenger\/([\d.]+).*$/, '$1'); },
+            WechatWork: function () { return _this.ua.replace(/^.*wxwork\/([\d.]+).*$/, '$1'); },
+            Taobao: function () { return _this.ua.replace(/^.*AliApp\(TB\/([\d.]+).*$/, '$1'); },
+            Alipay: function () { return _this.ua.replace(/^.*AliApp\(AP\/([\d.]+).*$/, '$1'); },
+            Weibo: function () { return _this.ua.replace(/^.*weibo__([\d.]+).*$/, '$1'); },
+            Douban: function () { return _this.ua.replace(/^.*com.douban.frodo\/([\d.]+).*$/, '$1'); },
+            Suning: function () { return _this.ua.replace(/^.*SNEBUY-APP([\d.]+).*$/, '$1'); },
+            iQiYi: function () { return _this.ua.replace(/^.*IqiyiVersion\/([\d.]+).*$/, '$1'); },
+            DingTalk: function () { return _this.ua.replace(/^.*DingTalk\/([\d.]+).*$/, '$1'); },
+            Huawei: function () { return _this.ua.replace(/^.*Version\/([\d.]+).*$/, '$1').replace(/^.*HuaweiBrowser\/([\d.]+).*$/, '$1'); },
+            Douyin: function () { return _this.ua.replace(/^.*app_version\/([\d.]+).*$/, '$1'); },
+            '115Browser': function () { return _this.ua.replace(/^.*115Browser\/([\d.]+).*$/, '$1'); },
+            '360': function () { return _this.ua.replace(/^.*QihooBrowser\/([\d.]+).*$/, '$1'); },
+            '360SE': function () {
+                var vers = _this.getChromeVars();
+                var hash = {
                     '108': '14.0',
                     '86': '13.0',
                     '78': '12.0',
@@ -3544,38 +3602,38 @@ class UaBrowser {
                     '45': '8.1',
                     '42': '8.0',
                     '31': '7.0',
-                    '21': '6.3'
+                    '21': '6.3',
                 };
                 return hash[vers] || '';
             },
-            '360EE': () => {
-                const vers = this.getChromeVars();
-                const hash = {
+            '360EE': function () {
+                var vers = _this.getChromeVars();
+                var hash = {
                     '86': '13.0',
                     '78': '12.0',
                     '69': '11.0',
                     '63': '9.5',
                     '55': '9.0',
                     '50': '8.7',
-                    '30': '7.5'
+                    '30': '7.5',
                 };
                 return hash[vers] || '';
             },
-            '2345Explorer': () => {
-                const vers = this.getChromeVars();
-                const hash = {
+            '2345Explorer': function () {
+                var vers = _this.getChromeVars();
+                var hash = {
                     '69': '10.0',
-                    '55': '9.9'
+                    '55': '9.9',
                 };
-                return hash[vers] || this.ua.replace(/^.*2345Explorer\/([\d.]+).*$/, '$1').replace(/^.*Mb2345Browser\/([\d.]+).*$/, '$1');
+                return hash[vers] || _this.ua.replace(/^.*2345Explorer\/([\d.]+).*$/, '$1').replace(/^.*Mb2345Browser\/([\d.]+).*$/, '$1');
             },
-            Liebao: () => {
-                let _version = '';
-                if (/LieBaoFast/.test(this.ua)) {
-                    _version = this.ua.replace(/^.*LieBaoFast\/([\d.]+).*$/, '$1');
+            Liebao: function () {
+                var _version = '';
+                if (/LieBaoFast/.test(_this.ua)) {
+                    _version = _this.ua.replace(/^.*LieBaoFast\/([\d.]+).*$/, '$1');
                 }
-                const vers = this.getChromeVars();
-                const hash = {
+                var vers = _this.getChromeVars();
+                var hash = {
                     '57': '6.5',
                     '49': '6.0',
                     '46': '5.9',
@@ -3583,28 +3641,28 @@ class UaBrowser {
                     '39': '5.2',
                     '34': '5.0',
                     '29': '4.5',
-                    '21': '4.0'
+                    '21': '4.0',
                 };
                 return _version || hash[vers] || '';
-            }
+            },
         };
         this.osVersion = {
-            Android: () => this.ua.replace(/^.*Android ([\d.]+);.*$/, '$1'),
-            iOS: () => this.ua.replace(/^.*OS ([\d_]+) like.*$/, '$1').replace(/_/g, '.'),
-            Debian: () => this.ua.replace(/^.*Debian\/([\d.]+).*$/, '$1'),
-            'Windows Phone': () => this.ua.replace(/^.*Windows Phone( OS)? ([\d.]+);.*$/, '$2'),
-            MacOS: () => this.ua.replace(/^.*Mac OS X -?([\d_]+).*$/, '$1').replace(/_/g, '.'),
-            WebOS: () => this.ua.replace(/^.*hpwOS\/([\d.]+);.*$/, '$1'),
-            HarmonyOS: () => {
-                const vers = this.ua.replace(/^Mozilla.*Android ([\d.]+)[;)].*$/, '$1');
-                const hash = {
-                    '10': '2'
+            Android: function () { return _this.ua.replace(/^.*Android ([\d.]+);.*$/, '$1'); },
+            iOS: function () { return _this.ua.replace(/^.*OS ([\d_]+) like.*$/, '$1').replace(/_/g, '.'); },
+            Debian: function () { return _this.ua.replace(/^.*Debian\/([\d.]+).*$/, '$1'); },
+            'Windows Phone': function () { return _this.ua.replace(/^.*Windows Phone( OS)? ([\d.]+);.*$/, '$2'); },
+            MacOS: function () { return _this.ua.replace(/^.*Mac OS X -?([\d_]+).*$/, '$1').replace(/_/g, '.'); },
+            WebOS: function () { return _this.ua.replace(/^.*hpwOS\/([\d.]+);.*$/, '$1'); },
+            HarmonyOS: function () {
+                var vers = _this.ua.replace(/^Mozilla.*Android ([\d.]+)[;)].*$/, '$1');
+                var hash = {
+                    '10': '2',
                 };
                 return hash[vers] || '';
             },
-            Windows: () => {
-                const vers = this.ua.replace(/^Mozilla\/\d.0 \(Windows NT ([\d.]+);.*$/, '$1');
-                const hash = {
+            Windows: function () {
+                var vers = _this.ua.replace(/^Mozilla\/\d.0 \(Windows NT ([\d.]+);.*$/, '$1');
+                var hash = {
                     '10': '10',
                     '6.4': '10',
                     '6.3': '8.1',
@@ -3613,18 +3671,45 @@ class UaBrowser {
                     '6.0': 'Vista',
                     '5.2': 'XP',
                     '5.1': 'XP',
-                    '5.0': '2000'
+                    '5.0': '2000',
                 };
                 return hash[vers] || parseInt(vers).toString();
-            }
+            },
         };
-        this.getChromeVars = () => this.ua.replace(/^.*Chrome\/([\d]+).*$/, '$1');
+        this.getChromeVars = function () { return _this.ua.replace(/^.*Chrome\/([\d]+).*$/, '$1'); };
         this.setUA(ua);
     }
-    getEnv(ua) {
+    UaBrowser.prototype.getOs = function () {
+        return getValueOf(hash.os, osRegExp, this.ua);
+    };
+    UaBrowser.prototype.getEngine = function () {
+        return getValueOf(hash.engine, engineRegExp, this.ua);
+    };
+    UaBrowser.prototype.getBrowser = function () {
+        return getValueOf(hash.browser, browserRegExp, this.ua);
+    };
+    UaBrowser.prototype.getDevice = function () {
+        if (platfrom === 'MacIntel' && NAVIGATOR.maxTouchPoints > 1) {
+            return 'Tablet';
+        }
+        var device = getValueOf(hash.device, deviceRegExp, this.ua);
+        return device === 'unknown' ? 'PC' : device;
+    };
+    UaBrowser.prototype.setUA = function (ua) {
+        if (typeof ua === 'string') {
+            this.ua = ua;
+        }
+        else {
+            if (typeof ua !== 'undefined') {
+                console.warn('`ua` must be of type string.');
+            }
+            this.ua = UA;
+        }
+    };
+    UaBrowser.prototype.getEnv = function (ua) {
         var _a, _b;
         this.setUA(ua);
-        const env = {
+        var env = {
             version: 'unknown',
             osVersion: 'unknown',
             engine: this.getEngine(),
@@ -3633,16 +3718,18 @@ class UaBrowser {
             device: this.getDevice(),
             isWebview: isWebview(this.ua),
             language: (_a = getLanguage()) !== null && _a !== void 0 ? _a : 'unknown',
-            platfrom: platfrom !== null && platfrom !== void 0 ? platfrom : 'unknown'
+            platfrom: platfrom !== null && platfrom !== void 0 ? platfrom : 'unknown',
         };
-        let browser = env.browser;
-        let is360 = false;
+        var browser = env.browser;
+        var is360 = false;
         if (typeof chrome !== 'undefined') {
-            const vers = this.getChromeVars();
+            var vers = this.getChromeVars();
             if (chrome.adblock2345 || chrome.common2345) {
                 env.browser = '2345Explorer';
             }
-            else if (getMimeType('application/360softmgrplugin') || getMimeType('application/mozilla-npqihooquicklogin') || (vers > '36' && typeof showModalDialog !== 'undefined')) {
+            else if (getMimeType('application/360softmgrplugin') ||
+                getMimeType('application/mozilla-npqihooquicklogin') ||
+                (vers > '36' && typeof showModalDialog !== 'undefined')) {
                 is360 = true;
             }
             else if (vers > '45') {
@@ -3689,7 +3776,7 @@ class UaBrowser {
             env.version = this.ua.replace(/^.*Browser\/([\d.]+).*$/, '$1');
         }
         else if (env.browser === 'Firefox' && (typeof clientInformation !== 'undefined' || !(typeof u2f !== 'undefined'))) {
-            env.browser = `${env.browser} Nightly`;
+            env.browser = "".concat(env.browser, " Nightly");
         }
         else if (env.browser === 'Wechat' && isWechatMiniapp()) {
             env.browser = 'Wechat Miniapp';
@@ -3699,19 +3786,16 @@ class UaBrowser {
         }
         else if ((browserRegExp.Chrome.test(this.ua) && env.engine === 'WebKit' && parseInt(this.version.Chrome()) > 27) ||
             (env.browser === 'Opera' && parseInt(env.version) > 12) ||
-            (env.browser === 'Yandex')) {
+            env.browser === 'Yandex') {
             env.engine = 'Blink';
         }
         return env;
-    }
-}
+    };
+    return UaBrowser;
+}());
 const browser = new UaBrowser().getEnv();
 
-const powerUtils = Object.assign({ cloneDeep,
-    axios: request,
-    copy,
-    getQueryStringArgs,
-    browser }, is);
+var powerUtils = __assign({ cloneDeep: cloneDeep, axios: request, copy: copy, getQueryStringArgs: getQueryStringArgs, browser: browser }, is);
 
 export { powerUtils as default };
 //# sourceMappingURL=index.js.map

@@ -22,6 +22,18 @@ const axios = createInstance(defaults);
 axios.create = function (userConfig: AxiosRequestConfig) {
   return createInstance(mergeConfig(defaults, userConfig));
 };
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Expose Cancel & CancelToken
+// axios.CanceledError = CanceledError;
+axios.CancelToken = CancelToken;
+axios.isCancel = isCancel;
+// axios.VERSION = VERSION;
+// axios.toFormData = toFormData;
+
+// Expose AxiosError class
+// axios.AxiosError = AxiosError;
 // 取消请求
 axios.CancelToken = CancelToken; // 取消类
 axios.Cancel = Cancel;

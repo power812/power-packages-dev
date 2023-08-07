@@ -62,6 +62,6 @@
     ]
   },
   "include": [
-    "lib/index.ts"
+    "lib"
   ]
 }

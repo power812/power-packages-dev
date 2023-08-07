@@ -5,7 +5,7 @@ import { InterceptorManager } from './InterceptorManager';
 import mergeConfig from '../helpers/mergeConfig';
 
 class Axios {
-  private interceptors: {
+  public interceptors: {
     request: InterceptorManager<AxiosRequestConfig>;
     response: InterceptorManager<AxiosResponse<any>>;
   };

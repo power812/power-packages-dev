@@ -43,6 +43,9 @@ importers:
       rollup-plugin-polyfill-node:
         specifier: ^0.12.0
         version: 0.12.0(rollup@3.26.3)
+      rollup-plugin-serve:
+        specifier: ^2.0.2
+        version: 2.0.2
       tslib:
         specifier: ^2.6.0
         version: 2.6.0
@@ -148,12 +151,12 @@ importers:
 
   packages/utils:
     dependencies:
+      '@power88/axios':
+        specifier: workspace:^
+        version: link:../power-fetch-axios
       axios:
         specifier: ^1.4.0
         version: 1.4.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
 
 packages:
 
@@ -6351,6 +6354,7 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}

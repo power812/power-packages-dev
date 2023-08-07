@@ -3800,4 +3800,4 @@ var browser = new UaBrowser().getEnv();
 var powerUtils = __assign({ cloneDeep: cloneDeep, axios: request, copy: copy, getQueryStringArgs: getQueryStringArgs, browser: browser }, is);
 
 module.exports = powerUtils;
-//# sourceMappingURL=index.cjs.map
+//# sourceMappingURL=power.cjs.map

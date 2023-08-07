@@ -15,15 +15,15 @@
   },
   "scripts": {
     "prepare": "if [ ! -d 'dist' ]; then pnpm build; fi",
-    "dev": "rollup -c -w",
+    "dev": "nodemon ./examples/index.js",
     "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.4.0",
-    "lodash": "^4.17.21"
+    "@power88/axios": "workspace:^",
+    "axios": "^1.4.0"
   },
   "gitHead": "9625276451bc8a3758f16596f07951f11a2be22d"
 }

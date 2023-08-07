@@ -1,7 +1,7 @@
-import Axios from '../core/Axios';
+import Axios from './core/Axios';
 export type headersType = { [key: string]: string };
 export type XMLHttpRequestResponseType = '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
-import CancelToken from '../cancel/CancelToken';
+import CancelToken from './cancel/CancelToken';
 // Axios类
 // export interface Axios {
 //   defaults: AxiosRequestConfig;
