@@ -3701,7 +3701,7 @@ class UaBrowser {
 var browser = new UaBrowser().getEnv();
 
 const powerUtils = Object.assign({ cloneDeep,
-    request,
+    axios: request,
     copy,
     getQueryStringArgs,
     browser }, is);

@@ -119,27 +119,5 @@ export default async () => {
         banner,
       },
     }),
-
-    // Node.js commonjs bundle
-    // {
-    //   input: defaultInput,
-    //   output: {
-    //     file: `dist/node/${name}.cjs`,
-    //     format: 'cjs',
-    //     generatedCode: {
-    //       constBindings: true,
-    //     },
-    //     exports: 'default',
-    //     banner,
-    //   },
-    //   plugins: [
-    //     autoExternal(),
-    //     ts({
-    //       tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-    //     }),
-    //     resolve({ extensions: ['.js', '.ts'] }),
-    //     commonjs(),
-    //   ],
-    // },
   ];
 };
