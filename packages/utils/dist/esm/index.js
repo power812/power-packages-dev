@@ -1,3 +1,4 @@
+// Axios v1.0.0 Copyright (c) 2023  and contributors
 const toString$1 = Object.prototype.toString;
 function isDate$1(val) {
     return toString$1.call(val) === '[object Date]';
@@ -9,7 +10,7 @@ function isFormData$1(val) {
     return val && val instanceof FormData;
 }
 
-var is = /*#__PURE__*/Object.freeze({
+const is = /*#__PURE__*/Object.freeze({
     __proto__: null,
     isDate: isDate$1,
     isFormData: isFormData$1,
@@ -703,7 +704,7 @@ const isAsyncFn = kindOfTest('AsyncFunction');
 const isThenable = (thing) =>
   thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
 
-var utils = {
+const utils = {
   isArray,
   isArrayBuffer,
   isBuffer,
@@ -853,7 +854,7 @@ AxiosError.from = (error, code, config, request, response, customProps) => {
 };
 
 // eslint-disable-next-line strict
-var httpAdapter = null;
+const httpAdapter = null;
 
 /**
  * Determines if the given thing is a array or js object.
@@ -1244,19 +1245,19 @@ class InterceptorManager {
   }
 }
 
-var InterceptorManager$1 = InterceptorManager;
+const InterceptorManager$1 = InterceptorManager;
 
-var transitionalDefaults = {
+const transitionalDefaults = {
   silentJSONParsing: true,
   forcedJSONParsing: true,
   clarifyTimeoutError: false
 };
 
-var URLSearchParams$1 = typeof URLSearchParams !== 'undefined' ? URLSearchParams : AxiosURLSearchParams;
+const URLSearchParams$1 = typeof URLSearchParams !== 'undefined' ? URLSearchParams : AxiosURLSearchParams;
 
-var FormData$1 = typeof FormData !== 'undefined' ? FormData : null;
+const FormData$1 = typeof FormData !== 'undefined' ? FormData : null;
 
-var Blob$1 = typeof Blob !== 'undefined' ? Blob : null;
+const Blob$1 = typeof Blob !== 'undefined' ? Blob : null;
 
 /**
  * Determine if we're running in a standard browser environment
@@ -1307,7 +1308,7 @@ const isStandardBrowserEnv = (() => {
 })();
 
 
-var platform = {
+const platform = {
   isBrowser: true,
   classes: {
     URLSearchParams: URLSearchParams$1,
@@ -1574,7 +1575,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
   defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
 });
 
-var defaults$1 = defaults;
+const defaults$1 = defaults;
 
 // RawAxiosHeaders whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -1599,7 +1600,7 @@ const ignoreDuplicateOf = utils.toObjectSet([
  *
  * @returns {Object} Headers parsed into an object
  */
-var parseHeaders = rawHeaders => {
+const parseHeaders = rawHeaders => {
   const parsed = {};
   let key;
   let val;
@@ -1910,7 +1911,7 @@ AxiosHeaders.accessor(['Content-Type', 'Content-Length', 'Accept', 'Accept-Encod
 utils.freezeMethods(AxiosHeaders.prototype);
 utils.freezeMethods(AxiosHeaders);
 
-var AxiosHeaders$1 = AxiosHeaders;
+const AxiosHeaders$1 = AxiosHeaders;
 
 /**
  * Transform the data for a request or a response
@@ -1982,7 +1983,7 @@ function settle(resolve, reject, response) {
   }
 }
 
-var cookies = platform.isStandardBrowserEnv ?
+const cookies = platform.isStandardBrowserEnv ?
 
 // Standard browser envs support document.cookie
   (function standardBrowserEnv() {
@@ -2075,7 +2076,7 @@ function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 }
 
-var isURLSameOrigin = platform.isStandardBrowserEnv ?
+const isURLSameOrigin = platform.isStandardBrowserEnv ?
 
 // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
@@ -2226,7 +2227,7 @@ function progressEventReducer(listener, isDownloadStream) {
 
 const isXHRAdapterSupported = typeof XMLHttpRequest !== 'undefined';
 
-var xhrAdapter = isXHRAdapterSupported && function (config) {
+const xhrAdapter = isXHRAdapterSupported && function (config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
     let requestData = config.data;
     const requestHeaders = AxiosHeaders$1.from(config.headers).normalize();
@@ -2449,7 +2450,7 @@ utils.forEach(knownAdapters, (fn, value) => {
   }
 });
 
-var adapters = {
+const adapters = {
   getAdapter: (adapters) => {
     adapters = utils.isArray(adapters) ? adapters : [adapters];
 
@@ -2701,6 +2702,12 @@ validators$1.transitional = function transitional(validator, version, message) {
     if (version && !deprecatedWarnings[opt]) {
       deprecatedWarnings[opt] = true;
       // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
     }
 
     return validator ? validator(value, opt, opts) : true;
@@ -2740,7 +2747,7 @@ function assertOptions(options, schema, allowUnknown) {
   }
 }
 
-var validator = {
+const validator = {
   assertOptions,
   validators: validators$1
 };
@@ -2936,7 +2943,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
   Axios.prototype[method + 'Form'] = generateHTTPMethod(true);
 });
 
-var Axios$1 = Axios;
+const Axios$1 = Axios;
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -3054,7 +3061,7 @@ class CancelToken {
   }
 }
 
-var CancelToken$1 = CancelToken;
+const CancelToken$1 = CancelToken;
 
 /**
  * Syntactic sugar for invoking a function and expanding an array for arguments.
@@ -3164,7 +3171,7 @@ Object.entries(HttpStatusCode).forEach(([key, value]) => {
   HttpStatusCode[value] = key;
 });
 
-var HttpStatusCode$1 = HttpStatusCode;
+const HttpStatusCode$1 = HttpStatusCode;
 
 /**
  * Create an instance of Axios
@@ -3232,7 +3239,7 @@ axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 
 // this module should only have a default export
-var axios$1 = axios;
+const axios$1 = axios;
 
 const BASE_URL = 'http://localhost:7001';
 const request = axios$1.create({
@@ -3698,7 +3705,7 @@ class UaBrowser {
         return env;
     }
 }
-var browser = new UaBrowser().getEnv();
+const browser = new UaBrowser().getEnv();
 
 const powerUtils = Object.assign({ cloneDeep,
     axios: request,
@@ -3707,4 +3714,4 @@ const powerUtils = Object.assign({ cloneDeep,
     browser }, is);
 
 export { powerUtils as default };
-//# sourceMappingURL=index.esm.js.map
+//# sourceMappingURL=index.js.map

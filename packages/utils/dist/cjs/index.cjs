@@ -1,3 +1,4 @@
+// Axios v1.0.0 Copyright (c) 2023  and contributors
 'use strict';
 
 const toString$1 = Object.prototype.toString;
@@ -2703,6 +2704,12 @@ validators$1.transitional = function transitional(validator, version, message) {
     if (version && !deprecatedWarnings[opt]) {
       deprecatedWarnings[opt] = true;
       // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
     }
 
     return validator ? validator(value, opt, opts) : true;
@@ -3709,4 +3716,4 @@ const powerUtils = Object.assign({ cloneDeep,
     browser }, is);
 
 module.exports = powerUtils;
-//# sourceMappingURL=index.csm.js.map
+//# sourceMappingURL=index.cjs.map

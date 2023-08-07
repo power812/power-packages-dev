@@ -13,13 +13,15 @@ import { URL, fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const pkgPath = path.resolve(__dirname, './package.json');
+console.log(__dirname);
+
+const pkgPath = path.resolve(process.cwd(), './package.json');
 const lib = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
 const outputFileName = 'index';
 const name = 'index';
-const namedInput = './lib/index.ts'; //入口路径
-const defaultInput = './lib/axios.ts';
+
+// const defaultInput = './lib/index.ts';
 
 const buildConfig = ({ es5, browser = true, minifiedVersion = true, ...config }) => {
   const { file } = config.output;
@@ -27,9 +29,8 @@ const buildConfig = ({ es5, browser = true, minifiedVersion = true, ...config })
   const basename = path.basename(file, ext);
   const extArr = ext.split('.');
   extArr.shift();
-
   const build = ({ minified }) => ({
-    input: namedInput,
+    input: config.input,
     ...config,
     output: {
       ...config.output,
@@ -74,7 +75,9 @@ const buildConfig = ({ es5, browser = true, minifiedVersion = true, ...config })
   return configs;
 };
 
-export default async () => {
+// namedInput入口路径
+export default (namedInput = './lib/index.ts', output = '') => {
+  console.log(namedInput);
   const year = new Date().getFullYear();
   const banner = `// Axios v${lib.version} Copyright (c) ${year} ${lib.author} and contributors`;
 
@@ -83,7 +86,7 @@ export default async () => {
     ...buildConfig({
       input: namedInput,
       output: {
-        file: `dist/esm/${outputFileName}.js`,
+        file: `${output}dist/esm/${outputFileName}.js`,
         format: 'esm',
         generatedCode: {
           constBindings: true,
@@ -95,10 +98,10 @@ export default async () => {
 
     // Browser UMD bundle for CDN
     ...buildConfig({
-      input: defaultInput,
+      input: namedInput,
       es5: true,
       output: {
-        file: `dist/umd/${outputFileName}.js`,
+        file: `${output}dist/umd/${outputFileName}.js`,
         name,
         format: 'umd',
         exports: 'default',
@@ -108,11 +111,11 @@ export default async () => {
 
     // Browser CJS bundle
     ...buildConfig({
-      input: defaultInput,
+      input: namedInput,
       es5: false,
       minifiedVersion: false, // 是否打包mini版本
       output: {
-        file: `dist/cjs/${name}.cjs`,
+        file: `${output}dist/cjs/${name}.cjs`,
         name,
         format: 'cjs',
         exports: 'default',

@@ -9,11 +9,11 @@
     "access": "public"
   },
   "scripts": {
+    "prepare": "if [ ! -d 'dist' ]; then pnpm build; fi",
+    "dev": "webpack-dev-server --config './webpack.config.js'",
     "build": "rollup -c",
     "examples": "node ./examples/server.js",
-    "dev": "webpack-dev-server --config './webpack.config.js'",
-    "start": "nodemon ./server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./server/server.js"
   },
   "keywords": [
     "axios"

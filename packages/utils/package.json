@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "module": "./dist/index.esm.js",
   "types": "./index.d.ts",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -13,8 +14,9 @@
     "url": "https://github.com/power812/power-packages-dev/tree/master/packages/utils"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo hello"
+    "prepare": "if [ ! -d 'dist' ]; then pnpm build; fi",
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",

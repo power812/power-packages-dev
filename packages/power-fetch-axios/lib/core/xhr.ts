@@ -44,7 +44,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     // 处理参数
     processConfig(config);
     // XMLHttp实例化
-    let request = new XMLHttpRequest();
+    let request: XMLHttpRequest | null = new XMLHttpRequest();
     /**************** 参数处理 ************************/
     const {
       auth,
@@ -102,7 +102,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
         if (data === null && name.toLowerCase() === 'content-type') {
           delete headers[name];
         }
-        request.setRequestHeader(name, headers[name]);
+        request?.setRequestHeader(name, headers[name]);
       });
     }
     // 定义响应类型(responseType属性，它默认为text，可以指定了responseType: "json")
@@ -114,7 +114,7 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
     // 取消请求
     if (cancelToken) {
       cancelToken.promise.then((reason) => {
-        request.abort();
+        request?.abort();
         reject(reason);
       });
     }
@@ -146,17 +146,37 @@ export default function dispatchRequest(config: AxiosRequestConfig) {
         // 转化成json
         response.data = transform(response.data, response.headers, response.config.transformResponse);
         resolve(response);
+        // 清除缓存
+        request = null;
       } else {
         reject(createError(`响应失败,响应状态码: ${response.status}`, config, request.status, request, response));
+        // 清除缓存
+        request = null;
       }
+    };
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('请求取消', config, request && request.status, request));
+
+      // Clean up request
+      request = null;
     };
 
     // 网络错误事件
     request.onerror = function () {
-      reject(createError('网络错误', config, request.status, request));
+      reject(createError('网络错误', config, request && request.status, request));
+      // 清除缓存
+      request = null;
     };
     request.ontimeout = function () {
-      reject(createError(`请求超时,超过 ${timeout} ms `, config, request.status, request));
+      reject(createError(`请求超时,超过 ${timeout} ms `, config, request && request.status, request));
+      // 清除缓存
+      request = null;
     };
 
     /**************** 函数************************/
