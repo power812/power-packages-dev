@@ -1,14 +1,14 @@
-// import axios from '@power88/axios';
-// import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from '@power88/axios';
-import axios from 'axios';
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from '@power88/axios';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from '@power88/axios';
+// import axios from 'axios';
+// import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 /* 服务器返回数据的的类型，根据接口文档确定 */
 export interface Result<T = any> {
   code: number;
   message: string;
   data: T;
 }
-const BASE_URL = 'http://localhost:7001';
+const BASE_URL = '';
 export const request: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,

@@ -7,6 +7,27 @@
 </head>
 <body>
   <script src="../dist/umd/index.js">
+    <div>请打开控制台</div>
+  </script>
+  <script>
+    const {copy, cloneDeep, request,browser, axios, getQueryStringArgs } = power
+    // 复制文本
+    copy('str')
+    // 对象深拷贝
+    const obj = {a: '123'}
+    const deepObj = cloneDeep(obj)
+    // axios封装拦截器
+    // axios.get('/api')
+    // getQueryStringArgs
+
+    const val = getQueryStringArgs('key')
+    console.log(val)
+    // 判断浏览器设备平台
+    console.log(browser)
+    // 复制文字
+    const text = 100
+    copy(text)
+    // power.axios.get('/api')
   </script>
 </body>
 </html>

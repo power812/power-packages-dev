@@ -8,7 +8,7 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "rollup -c -w",
+    "dev": "echo '请到package下运行命令开发'",
     "build": "rollup -c",
     "changeset": "changeset && changeset version",
     "publish": "changeset publish"

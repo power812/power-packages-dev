@@ -6,7 +6,7 @@ declare const powerUtils: {
     isObject(val: any): val is Object;
     isFormData(val: any): boolean;
     cloneDeep: typeof cloneDeep;
-    axios: import("axios").AxiosInstance;
+    axios: import("@power88/axios").AxiosInstance;
     copy: typeof copy;
     getQueryStringArgs: typeof getQueryStringArgs;
     browser: {

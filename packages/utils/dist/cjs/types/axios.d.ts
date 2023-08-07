@@ -1,4 +1,4 @@
-import type { AxiosInstance } from 'axios';
+import type { AxiosInstance } from '@power88/axios';
 export interface Result<T = any> {
     code: number;
     message: string;
