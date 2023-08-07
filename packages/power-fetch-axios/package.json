@@ -1,6 +1,6 @@
 {
   "name": "@power88/axios",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "参考axios造轮子",
   "main": "./lib/index.ts",
   "module": "./dist/esm/index.js",
